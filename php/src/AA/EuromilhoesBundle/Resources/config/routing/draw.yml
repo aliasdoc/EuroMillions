@@ -1,0 +1,30 @@
+aa_draw:
+    pattern:  /
+    defaults: { _controller: "AAEuromilhoesBundle:Draw:index" }
+
+aa_draw_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "AAEuromilhoesBundle:Draw:show" }
+
+aa_draw_new:
+    pattern:  /new
+    defaults: { _controller: "AAEuromilhoesBundle:Draw:new" }
+
+aa_draw_create:
+    pattern:  /create
+    defaults: { _controller: "AAEuromilhoesBundle:Draw:create" }
+    requirements: { _method: post }
+
+aa_draw_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "AAEuromilhoesBundle:Draw:edit" }
+
+aa_draw_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "AAEuromilhoesBundle:Draw:update" }
+    requirements: { _method: post|put }
+
+aa_draw_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "AAEuromilhoesBundle:Draw:delete" }
+    requirements: { _method: post|delete }
