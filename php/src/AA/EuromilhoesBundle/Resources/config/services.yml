@@ -1,7 +1,0 @@
-parameters:
-#    aa_euromilhoes.example.class: AA\EuromilhoesBundle\Example
-
-services:
-#    aa_euromilhoes.example:
-#        class: %aa_euromilhoes.example.class%
-#        arguments: [@service_id, "plain_value", %parameter%]

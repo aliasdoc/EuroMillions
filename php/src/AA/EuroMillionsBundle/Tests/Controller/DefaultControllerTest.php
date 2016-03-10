@@ -1,6 +1,6 @@
 <?php
 
-namespace AA\EuromilhoesBundle\Tests\Controller;
+namespace AA\EuroMillionsBundle\Tests\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace AA\EuromilhoesBundle\Command;
+namespace AA\EuroMillionsBundle\Command;
 
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputArgument;
@@ -32,7 +32,7 @@ class UpdateDrawsCommand extends ContainerAwareCommand
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $em = $this->getContainer()->get('doctrine')->getEntityManager();
-        $drawRepository = $em->getRepository('AAEuromilhoesBundle:Draw');
+        $drawRepository = $em->getRepository('AAEuroMillionsBundle:Draw');
 
         // Gets the last draw stored in the database
         $latestDraw = $drawRepository->getLatestDraw();

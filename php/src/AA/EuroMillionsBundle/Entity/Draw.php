@@ -1,6 +1,6 @@
 <?php
 
-namespace AA\EuromilhoesBundle\Entity;
+namespace AA\EuroMillionsBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 

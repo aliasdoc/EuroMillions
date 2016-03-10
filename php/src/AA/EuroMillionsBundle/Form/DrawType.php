@@ -1,6 +1,6 @@
 <?php
 
-namespace AA\EuromilhoesBundle\Form;
+namespace AA\EuroMillionsBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -32,7 +32,7 @@ class DrawType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'AA\EuromilhoesBundle\Entity\Draw'
+            'data_class' => 'AA\EuroMillionsBundle\Entity\Draw'
         ));
     }
 
@@ -41,6 +41,6 @@ class DrawType extends AbstractType
      */
     public function getName()
     {
-        return 'aa_euromilhoesbundle_draw';
+        return 'aa_EuroMillionsbundle_draw';
     }
 }
