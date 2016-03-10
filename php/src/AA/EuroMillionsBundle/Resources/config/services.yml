@@ -1,0 +1,7 @@
+parameters:
+#    aa_EuroMillions.example.class: AA\EuroMillionsBundle\Example
+
+services:
+#    aa_EuroMillions.example:
+#        class: %aa_EuroMillions.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]

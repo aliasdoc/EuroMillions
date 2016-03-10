@@ -1,4 +1,4 @@
-AA\EuromilhoesBundle\Entity\Draw:
+AA\EuroMillionsBundle\Entity\Draw:
     type: entity
     repositoryClass: DrawRepository
     table: draw

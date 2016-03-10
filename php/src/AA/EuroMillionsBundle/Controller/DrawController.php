@@ -1,12 +1,12 @@
 <?php
 
-namespace AA\EuromilhoesBundle\Controller;
+namespace AA\EuroMillionsBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
-use AA\EuromilhoesBundle\Entity\Draw;
-use AA\EuromilhoesBundle\Form\DrawType;
+use AA\EuroMillionsBundle\Entity\Draw;
+use AA\EuroMillionsBundle\Form\DrawType;
 
 /**
  * Draw controller.
@@ -23,9 +23,9 @@ class DrawController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entities = $em->getRepository('AAEuromilhoesBundle:Draw')->findAll();
+        $entities = $em->getRepository('AAEuroMillionsBundle:Draw')->findAll();
 
-        return $this->render('AAEuromilhoesBundle:Draw:index.html.twig', array(
+        return $this->render('AAEuroMillionsBundle:Draw:index.html.twig', array(
             'entities' => $entities,
         ));
     }
@@ -48,7 +48,7 @@ class DrawController extends Controller
             return $this->redirect($this->generateUrl('aa_draw_show', array('id' => $entity->getId())));
         }
 
-        return $this->render('AAEuromilhoesBundle:Draw:new.html.twig', array(
+        return $this->render('AAEuroMillionsBundle:Draw:new.html.twig', array(
             'entity' => $entity,
             'form'   => $form->createView(),
         ));
@@ -82,7 +82,7 @@ class DrawController extends Controller
         $entity = new Draw();
         $form   = $this->createCreateForm($entity);
 
-        return $this->render('AAEuromilhoesBundle:Draw:new.html.twig', array(
+        return $this->render('AAEuroMillionsBundle:Draw:new.html.twig', array(
             'entity' => $entity,
             'form'   => $form->createView(),
         ));
@@ -96,7 +96,7 @@ class DrawController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('AAEuromilhoesBundle:Draw')->find($id);
+        $entity = $em->getRepository('AAEuroMillionsBundle:Draw')->find($id);
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Draw entity.');
@@ -104,7 +104,7 @@ class DrawController extends Controller
 
         $deleteForm = $this->createDeleteForm($id);
 
-        return $this->render('AAEuromilhoesBundle:Draw:show.html.twig', array(
+        return $this->render('AAEuroMillionsBundle:Draw:show.html.twig', array(
             'entity'      => $entity,
             'delete_form' => $deleteForm->createView(),        ));
     }
@@ -117,7 +117,7 @@ class DrawController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('AAEuromilhoesBundle:Draw')->find($id);
+        $entity = $em->getRepository('AAEuroMillionsBundle:Draw')->find($id);
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Draw entity.');
@@ -126,7 +126,7 @@ class DrawController extends Controller
         $editForm = $this->createEditForm($entity);
         $deleteForm = $this->createDeleteForm($id);
 
-        return $this->render('AAEuromilhoesBundle:Draw:edit.html.twig', array(
+        return $this->render('AAEuroMillionsBundle:Draw:edit.html.twig', array(
             'entity'      => $entity,
             'edit_form'   => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
@@ -159,7 +159,7 @@ class DrawController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('AAEuromilhoesBundle:Draw')->find($id);
+        $entity = $em->getRepository('AAEuroMillionsBundle:Draw')->find($id);
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Draw entity.');
@@ -175,7 +175,7 @@ class DrawController extends Controller
             return $this->redirect($this->generateUrl('aa_draw_edit', array('id' => $id)));
         }
 
-        return $this->render('AAEuromilhoesBundle:Draw:edit.html.twig', array(
+        return $this->render('AAEuroMillionsBundle:Draw:edit.html.twig', array(
             'entity'      => $entity,
             'edit_form'   => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
@@ -192,7 +192,7 @@ class DrawController extends Controller
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $entity = $em->getRepository('AAEuromilhoesBundle:Draw')->find($id);
+            $entity = $em->getRepository('AAEuroMillionsBundle:Draw')->find($id);
 
             if (!$entity) {
                 throw $this->createNotFoundException('Unable to find Draw entity.');

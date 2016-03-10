@@ -1,6 +1,6 @@
 <?php
 
-namespace AA\EuromilhoesBundle\Tests\Controller;
+namespace AA\EuroMillionsBundle\Tests\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
@@ -19,7 +19,7 @@ class DrawControllerTest extends WebTestCase
 
         // Fill in the form and submit it
         $form = $crawler->selectButton('Create')->form(array(
-            'aa_euromilhoesbundle_drawtype[field_name]'  => 'Test',
+            'aa_EuroMillionsbundle_drawtype[field_name]'  => 'Test',
             // ... other fields to fill
         ));
 
@@ -33,7 +33,7 @@ class DrawControllerTest extends WebTestCase
         $crawler = $client->click($crawler->selectLink('Edit')->link());
 
         $form = $crawler->selectButton('Edit')->form(array(
-            'aa_euromilhoesbundle_drawtype[field_name]'  => 'Foo',
+            'aa_EuroMillionsbundle_drawtype[field_name]'  => 'Foo',
             // ... other fields to fill
         ));
 

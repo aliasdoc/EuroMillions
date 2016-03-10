@@ -1,7 +1,0 @@
-aa_euromilhoes_homepage:
-    pattern:  /hello/{name}
-    defaults: { _controller: AAEuromilhoesBundle:Default:index }
-
-AAEuromilhoesBundle_aa_draw:
-    resource: "@AAEuromilhoesBundle/Resources/config/routing/draw.yml"
-    prefix:   /draw
