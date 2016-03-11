@@ -4,18 +4,6 @@ namespace AA\EuroMillionsBundle\Utils\Crawler;
 class EuroMillionsCrawler extends Crawler
 {
     /**
-     * Sets the draw's date
-     *
-     * @author Artur Alves <artur.alves@gatewit.com>
-     *
-     * @param  int $date An Unix timestamp of the draw's date
-     */
-    public function setDate($date)
-    {
-        $this->date = $date;
-    }
-
-    /**
      * Executes the crawler and gets the draw's results
      *
      * @author Artur Alves <artur.alves@gatewit.com>
@@ -46,6 +34,20 @@ class EuroMillionsCrawler extends Crawler
             }
         }
 
+        $this->hasCrawled = true;
+
         return $crawlResults;
+    }
+
+    /**
+     * Sets the draw's date
+     *
+     * @author Artur Alves <artur.alves@gatewit.com>
+     *
+     * @param  int $date An Unix timestamp of the draw's date
+     */
+    public function setDate($date)
+    {
+        $this->date = $date;
     }
 }
