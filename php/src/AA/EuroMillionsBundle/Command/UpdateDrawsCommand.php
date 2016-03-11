@@ -8,6 +8,8 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
+use AA\EuroMillionsBundle\Utils\Crawler\EuroMillionsCrawler;
+
 /**
  * Imports the latest draws
  */
@@ -31,7 +33,7 @@ class UpdateDrawsCommand extends ContainerAwareCommand
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $em = $this->getContainer()->get('doctrine')->getEntityManager();
+        $em = $this->getContainer()->get('doctrine')->getManager();
         $drawRepository = $em->getRepository('AAEuroMillionsBundle:Draw');
 
         // Gets the last draw stored in the database
@@ -40,64 +42,25 @@ class UpdateDrawsCommand extends ContainerAwareCommand
         // Finds out which dates since $latestDraw also had draws
         $latestDrawDate = $latestDraw->getDate()->format('Y-m-d');
         $latestDrawDates = $drawRepository->getDrawDatesSince($latestDrawDate);
-        if (count($latestDrawDates)) {
-            $output->writeln("Latest draw dates: ".json_encode($latestDrawDates));
-        } else {
+        if (count($latestDrawDates) == 0) {
             $output->writeln("[".date("Y-m-d", strtotime("today")) . "] - Nothing to update");
-        }
+        } else {
+            $output->writeln("Latest draw dates: ".json_encode($latestDrawDates));
 
-        foreach ($latestDrawDates as $key => $date) {
-            // Obtains the results of each draw
-            $result = $this->getDrawResult($date);
+            $crawler = new EuroMillionsCrawler();
+            foreach ($latestDrawDates as $key => $date) {
+                // Obtains the results of each draw
+                $crawler->setDate(strtotime($date));
+                $result = $crawler->crawl();
 
-            // Creates a new Draw and stores it in the database
-            $draw = $drawRepository->fromArray($result);
-            $draw->setDate($date);
-            $em->persist($draw);
-            $em->flush();
-        }
-    }
-
-    /**
-     * Gets the result of a certain draw by its date
-     *
-     * @author Artur Alves <artur.ze.alves@gmail.com>
-     *
-     * @param  string $date The date as 'Y-m-d'
-     *
-     * @return array The draw's result
-     */
-    private function getDrawResult($date)
-    {
-        $date = date('d-m-Y', strtotime($date));
-        $siteContent = file_get_contents("http://pt.euro-millions.com/resultados/".$date);
-        if (empty($siteContent)) {
-            $output->writeln("Error getting draw information.");
-            die;
-        }
-
-        $doc = new \DOMDocument();
-        libxml_use_internal_errors(true);
-        if(!$doc->loadHTML($siteContent)) {
-            $output->writeln("Failed to load html");
-            die;
-        }
-        libxml_use_internal_errors(false);
-        $numberWraperDomNode = $doc->getElementById('jsBallOrderCell');
-        $numbersDomNodes = $numberWraperDomNode->getElementsByTagName('li');
-
-        $result = array(
-            "numbers" => array(),
-            "stars" => array(),
-        );
-        foreach ($numbersDomNodes as $key => $numberDomNode) {
-            if ($key < 5) {
-                $result['numbers'][] = $numberDomNode->nodeValue;
-            } else {
-                $result['stars'][] = $numberDomNode->nodeValue;
+                // Creates a new Draw and stores it in the database
+                $draw = $drawRepository->fromArray($result);
+                $draw->setDate($date);
+                $em->persist($draw);
+                $em->flush();
             }
         }
 
-        return $result;
+        $output->writeln("Execution terminated successfully");
     }
 }
