@@ -1,8 +1,30 @@
 <?php
 namespace AA\EuroMillionsBundle\Utils\Crawler;
 
-abstract class Crawler
+class Crawler
 {
+    protected $hasCrawled;
+
+    /**
+     * Constructor
+     *
+     * @author Artur Alves <artur.alves@gatewit.com>
+     */
+    public function __construct()
+    {
+        $this->hasCrawled = false;
+    }
+
+    /**
+     * Executes the crawler
+     *
+     * @author Artur Alves <artur.alves@gatewit.com>
+     */
+    public function crawl()
+    {
+        $this->hasCrawled = true;
+    }
+
     /**
      * Gets the content of a URL
      *
@@ -32,9 +54,14 @@ abstract class Crawler
     }
 
     /**
-     * Executes the crawler
+     * Checks if the crawler has crawled
      *
      * @author Artur Alves <artur.alves@gatewit.com>
+     *
+     * @return boolean True if the crawler has executed, false otherwise
      */
-    abstract public function crawl();
+    public function hasCrawled()
+    {
+        return $this->hasCrawled;
+    }
 }
