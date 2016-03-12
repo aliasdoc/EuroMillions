@@ -6,12 +6,14 @@ php:
   - '5.5'
   - '5.6'
   - '7.0'
-  - hhvm
-  - nightly
+
+allow_failures:
+  - php: '5.3.3'
 
 before_script:
   - cd php/
   - travis_retry composer self-update && composer --version
+  - if [[ ${TRAVIS_PHP_VERSION:0:3} == "5.3.3" ]]; then composer config -g -- disable-tls true; fi
   - travis_retry composer install -n
   - cp app/config/parameters.yml.dist app/config/parameters.yml
   - php app/console doctrine:database:create --env=test
