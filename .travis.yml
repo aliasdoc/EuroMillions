@@ -12,5 +12,8 @@ php:
 before_script:
   - cp php/app/config/parameters.yml.dist php/app/config/parameters.yml
   - cd php/ && composer install -n
+  - php app/console doctrine:database:create --env=test
+  - php app/console doctrine:schema:create --env=test
+  - php app/console doctrine:fixtures:load -n --env=test
 
 script: phpunit -c app/
