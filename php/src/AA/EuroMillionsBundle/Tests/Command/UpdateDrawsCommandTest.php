@@ -4,9 +4,9 @@ namespace AA\EuroMillionsBundle\Tests\Command;
 use AA\EuroMillionsBundle\Command\UpdateDrawsCommand;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Component\Console\Tester\CommandTester;
-use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
+use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
-class UpdateDrawsCommandTest extends KernelTestCase
+class UpdateDrawsCommandTest extends WebTestCase
 {
     public function testExecute()
     {
