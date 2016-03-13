@@ -1,13 +1,41 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
     <head>
-        <meta charset="UTF-8" />
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+        <!-- <meta name="description" content=""> -->
+        <meta name="author" content="Artur Alves <artur.ze.alves@gmail.com>">
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+
+        <title>{% block title %}Welcome!{% endblock %}</title>
+
+        <!-- Bootstrap core CSS -->
+        <link href="{{ asset('bundles/aaeuromillions/css/bootstrap.min.css') }}" rel="stylesheet">
+
+        <!-- Custom styles for this template -->
+        <link href="{{ asset('bundles/aaeuromillions/css/dashboard.min.css') }}" rel="stylesheet">
+
+        {% block stylesheets %}{% endblock %}
     </head>
+
     <body>
-        {% block body %}{% endblock %}
+        {% include 'navbar.html.twig' %}
+
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-3 col-md-2 sidebar">
+                    {% include 'sidenav.html.twig' %}
+                </div>
+                <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+                    {% block body %}{% endblock %}
+                </div>
+            </div>
+        </div>
+
+        <script src="{{ asset('bundles/aaeuromillions/js/jquery-2.2.1.min.js') }}"></script>
+        <script src="{{ asset('bundles/aaeuromillions/js/bootstrap.min.js') }}"></script>
         {% block javascripts %}{% endblock %}
     </body>
 </html>
