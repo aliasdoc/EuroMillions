@@ -290,4 +290,32 @@ class Draw
 
         return $this;
     }
+    /**
+     * @var string
+     */
+    private $result;
+
+
+    /**
+     * Set result
+     *
+     * @param string $result
+     * @return Draw
+     */
+    public function setResult($result)
+    {
+        $this->result = $result;
+
+        return $this;
+    }
+
+    /**
+     * Get result
+     *
+     * @return string 
+     */
+    public function getResult()
+    {
+        return $this->result;
+    }
 }

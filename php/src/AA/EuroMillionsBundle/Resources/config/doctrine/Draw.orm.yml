@@ -36,7 +36,9 @@ AA\EuroMillionsBundle\Entity\Draw:
             type: integer
             length: 2
             nullable: false
+        result:
+            type: string
+            nullable: false
         date:
             type: datetime
             nullable: false
-    
