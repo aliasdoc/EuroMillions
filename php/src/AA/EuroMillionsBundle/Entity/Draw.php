@@ -15,39 +15,9 @@ class Draw
     private $id;
 
     /**
-     * @var integer
+     * @var string
      */
-    private $number1;
-
-    /**
-     * @var integer
-     */
-    private $number2;
-
-    /**
-     * @var integer
-     */
-    private $number3;
-
-    /**
-     * @var integer
-     */
-    private $number4;
-
-    /**
-     * @var integer
-     */
-    private $number5;
-
-    /**
-     * @var integer
-     */
-    private $star1;
-
-    /**
-     * @var integer
-     */
-    private $star2;
+    private $result;
 
     /**
      * @var \DateTime
@@ -66,164 +36,26 @@ class Draw
     }
 
     /**
-     * Set number1
+     * Set result
      *
-     * @param integer $number1
+     * @param string $result
      * @return Draw
      */
-    public function setNumber1($number1)
+    public function setResult($result)
     {
-        $this->number1 = $number1;
+        $this->result = $result;
 
         return $this;
     }
 
     /**
-     * Get number1
+     * Get result
      *
-     * @return integer
+     * @return string
      */
-    public function getNumber1()
+    public function getResult()
     {
-        return $this->number1;
-    }
-
-    /**
-     * Set number2
-     *
-     * @param integer $number2
-     * @return Draw
-     */
-    public function setNumber2($number2)
-    {
-        $this->number2 = $number2;
-
-        return $this;
-    }
-
-    /**
-     * Get number2
-     *
-     * @return integer
-     */
-    public function getNumber2()
-    {
-        return $this->number2;
-    }
-
-    /**
-     * Set number3
-     *
-     * @param integer $number3
-     * @return Draw
-     */
-    public function setNumber3($number3)
-    {
-        $this->number3 = $number3;
-
-        return $this;
-    }
-
-    /**
-     * Get number3
-     *
-     * @return integer
-     */
-    public function getNumber3()
-    {
-        return $this->number3;
-    }
-
-    /**
-     * Set number4
-     *
-     * @param integer $number4
-     * @return Draw
-     */
-    public function setNumber4($number4)
-    {
-        $this->number4 = $number4;
-
-        return $this;
-    }
-
-    /**
-     * Get number4
-     *
-     * @return integer
-     */
-    public function getNumber4()
-    {
-        return $this->number4;
-    }
-
-    /**
-     * Set number5
-     *
-     * @param integer $number5
-     * @return Draw
-     */
-    public function setNumber5($number5)
-    {
-        $this->number5 = $number5;
-
-        return $this;
-    }
-
-    /**
-     * Get number5
-     *
-     * @return integer
-     */
-    public function getNumber5()
-    {
-        return $this->number5;
-    }
-
-    /**
-     * Set star1
-     *
-     * @param integer $star1
-     * @return Draw
-     */
-    public function setStar1($star1)
-    {
-        $this->star1 = $star1;
-
-        return $this;
-    }
-
-    /**
-     * Get star1
-     *
-     * @return integer
-     */
-    public function getStar1()
-    {
-        return $this->star1;
-    }
-
-    /**
-     * Set star2
-     *
-     * @param integer $star2
-     * @return Draw
-     */
-    public function setStar2($star2)
-    {
-        $this->star2 = $star2;
-
-        return $this;
-    }
-
-    /**
-     * Get star2
-     *
-     * @return integer
-     */
-    public function getStar2()
-    {
-        return $this->star2;
+        return $this->result;
     }
 
     /**
@@ -289,33 +121,5 @@ class Draw
         }
 
         return $this;
-    }
-    /**
-     * @var string
-     */
-    private $result;
-
-
-    /**
-     * Set result
-     *
-     * @param string $result
-     * @return Draw
-     */
-    public function setResult($result)
-    {
-        $this->result = $result;
-
-        return $this;
-    }
-
-    /**
-     * Get result
-     *
-     * @return string 
-     */
-    public function getResult()
-    {
-        return $this->result;
     }
 }
