@@ -8,34 +8,6 @@ AA\EuroMillionsBundle\Entity\Draw:
             id: true
             generator:
                 strategy: AUTO
-        number1:
-            type: integer
-            length: 2
-            nullable: false
-        number2:
-            type: integer
-            length: 2
-            nullable: false
-        number3:
-            type: integer
-            length: 2
-            nullable: false
-        number4:
-            type: integer
-            length: 2
-            nullable: false
-        number5:
-            type: integer
-            length: 2
-            nullable: false
-        star1:
-            type: integer
-            length: 2
-            nullable: false
-        star2:
-            type: integer
-            length: 2
-            nullable: false
         result:
             type: string
             nullable: false
