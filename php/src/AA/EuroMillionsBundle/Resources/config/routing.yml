@@ -1,6 +1,6 @@
 aa_EuroMillions_homepage:
     pattern:  /
-    defaults: { _controller: AAEuroMillionsBundle:Dashboard:index }
+    defaults: { _controller: AAEuroMillionsBundle:Dashboard:teste }
 
 # AAEuroMillionsBundle_aa_draw:
 #     resource: "@AAEuroMillionsBundle/Resources/config/routing/draw.yml"

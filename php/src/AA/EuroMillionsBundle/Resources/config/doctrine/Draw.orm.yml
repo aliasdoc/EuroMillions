@@ -12,5 +12,5 @@ AA\EuroMillionsBundle\Entity\Draw:
             type: string
             nullable: false
         date:
-            type: datetime
+            type: date
             nullable: false

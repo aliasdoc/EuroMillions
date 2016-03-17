@@ -81,28 +81,4 @@ class DrawRepository extends EntityRepository
             return false;
         }
     }
-
-    /**
-     * Creates an instance of Draw from an array
-     *
-     * @author Artur Alves <artur.ze.alves@gmail.com>
-     *
-     * @param  array $data The data to fill the Draw object
-     *
-     * @return Draw|null A Draw or null in case of error
-     */
-    public function fromArray($data)
-    {
-        if (!is_array($data)) {
-            return null;
-        }
-
-        if (!is_array($data['numbers']) || !is_array($data['stars'])) {
-            return null;
-        }
-
-        $draw = new Draw();
-        $draw->fromArray($data);
-        return $draw;
-    }
 }

@@ -9,6 +9,9 @@ use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
 use AA\EuroMillionsBundle\Utils\Crawler\EuroMillionsCrawler;
+use AA\EuroMillionsBundle\Entity\Draw;
+
+use AA\EuroMillionsBundle\Helper\RulesHelper;
 
 /**
  * Imports the latest draws
@@ -33,6 +36,9 @@ class UpdateDrawsCommand extends ContainerAwareCommand
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
+        // $rules = RulesHelper::getInstance($this->getContainer());
+        // die("--".$rules->getNumbersCount());
+
         $em = $this->getContainer()->get('doctrine')->getManager();
         $drawRepository = $em->getRepository('AAEuroMillionsBundle:Draw');
 
@@ -51,13 +57,22 @@ class UpdateDrawsCommand extends ContainerAwareCommand
             foreach ($latestDrawDates as $key => $date) {
                 // Obtains the results of each draw
                 $crawler->setDate(strtotime($date));
-                $result = $crawler->crawl();
+                // $result = $crawler->crawl();
+                $result = json_decode('{"numbers":[13,14,30,32,39],"stars":[3,9]}');
 
                 // Creates a new Draw and stores it in the database
-                $draw = $drawRepository->fromArray($result);
+                $draw = new Draw();
+                $draw->setResult(json_encode($result));
                 $draw->setDate($date);
-                $em->persist($draw);
-                $em->flush();
+
+                $validator = $this->getContainer()->get('validator');
+                $errors = $validator->validate($draw);
+                if(count($errors) > 0) {
+                    $output->writeln("Error: ".json_encode($errors));
+                } else {
+                    $em->persist($draw);
+                    $em->flush();
+                }
             }
         }
 
