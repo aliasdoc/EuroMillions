@@ -3,9 +3,13 @@
 namespace AA\EuroMillionsBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Validator\ExecutionContextInterface;
+use AA\EuroMillionsBundle\Helper\RulesHelper;
 
 /**
  * Draw
+ * @Assert\Callback(methods={"isDrawValid"})
  */
 class Draw
 {
@@ -16,11 +20,13 @@ class Draw
 
     /**
      * @var string
+     * @Assert\NotBlank()
      */
     private $result;
 
     /**
      * @var \DateTime
+     * @Assert\Date()
      */
     private $date;
 
@@ -85,41 +91,53 @@ class Draw
         return $this->date;
     }
 
-    /**
-     * Populates the entity with values from an array
-     *
-     * @author Artur Alves <artur.ze.alves@gmail.com>
-     *
-     * @param  array $data The values to populate the entity
-     *
-     * @return Draw The entity populated
-     */
-    public function fromArray($data)
+    public function isDrawValid(ExecutionContextInterface $context)
     {
-        if (!is_array($data)) {
-            return null;
+        $result = json_decode($this->getResult(), true);
+
+        // Checks if the result array format is valid
+        if (!isset($result['numbers']) || !isset($result['stars'])) {
+            $context->addViolationAt(
+                'result',
+                'The result format is not valid',
+                array(),
+                null
+            );
         }
 
-        if (!is_array($data['numbers']) || !is_array($data['stars'])) {
-            return null;
+        $rulesHelper = RulesHelper::getInstance();
+
+        // Checks if the numbers count is valid
+        if (count($result['numbers']) !== $rulesHelper->getNumbersCount()) {
+            $context->addViolationAt(
+                'result',
+                'The numbers count is not valid',
+                array(),
+                null
+            );
         }
 
-        if (count($data['numbers']) != 5 || count($data['stars']) != 2) {
-            return null;
+        // Checks if the stars count is valid
+        if (count($result['stars']) !== $rulesHelper->getStarsCount()) {
+            $context->addViolationAt(
+                'result',
+                'The stars count is not valid',
+                array(),
+                null
+            );
         }
 
-        $this->setNumber1($data['numbers'][0]);
-        $this->setNumber2($data['numbers'][1]);
-        $this->setNumber3($data['numbers'][2]);
-        $this->setNumber4($data['numbers'][3]);
-        $this->setNumber5($data['numbers'][4]);
-        $this->setStar1($data['stars'][0]);
-        $this->setStar2($data['stars'][1]);
+        $date = date('D', strtotime($this->getDate()->format('Y-m-d')));
+        $drawDays = array($rulesHelper->getRecurrency());
 
-        if (isset($data['date'])) {
-            $this->setDate($data['date']);
+        // Checks if the date is valid
+        if (!in_array($date, $drawDays)) {
+            $context->addViolationAt(
+                'result',
+                'The date is not valid',
+                array(),
+                null
+            );
         }
-
-        return $this;
     }
 }
