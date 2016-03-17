@@ -15,17 +15,11 @@ class DrawType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('number1')
-            ->add('number2')
-            ->add('number3')
-            ->add('number4')
-            ->add('number5')
-            ->add('star1')
-            ->add('star2')
+            ->add('result')
             ->add('date')
         ;
     }
-    
+
     /**
      * @param OptionsResolverInterface $resolver
      */
