@@ -1,4 +1,3 @@
-aa_EuroMillions:
-    resource: "@AAEuroMillionsBundle/Resources/config/routing.yml"
+artur_alves_euro_millions:
+    resource: "@ArturAlvesEuroMillionsBundle/Resources/config/routing.yml"
     prefix:   /
-
