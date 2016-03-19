@@ -16,4 +16,4 @@ artur_alves_euro_millions:
                     max: 11
             recurrency:
                 type: "daily"
-                value: "Tue, Fri"
+                value: "Tue,Fri"
