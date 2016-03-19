@@ -1,0 +1,19 @@
+imports:
+    - { resource: "@ArturAlvesEuroMillionsBundle/Resources/config/services.yml" }
+
+artur_alves_euro_millions:
+    rules:
+        draw:
+            numbers:
+                count: 5
+                range:
+                    min: 1
+                    max: 50
+            stars:
+                count: 2
+                range:
+                    min: 1
+                    max: 11
+            recurrency:
+                type: "daily"
+                value: "Tue,Fri"

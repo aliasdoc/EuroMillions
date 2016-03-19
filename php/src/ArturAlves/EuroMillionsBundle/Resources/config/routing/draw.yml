@@ -1,0 +1,30 @@
+aa_draw:
+    pattern:  /
+    defaults: { _controller: "ArturAlvesEuroMillionsBundle:Draw:index" }
+
+aa_draw_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "ArturAlvesEuroMillionsBundle:Draw:show" }
+
+aa_draw_new:
+    pattern:  /new
+    defaults: { _controller: "ArturAlvesEuroMillionsBundle:Draw:new" }
+
+aa_draw_create:
+    pattern:  /create
+    defaults: { _controller: "ArturAlvesEuroMillionsBundle:Draw:create" }
+    requirements: { _method: post }
+
+aa_draw_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "ArturAlvesEuroMillionsBundle:Draw:edit" }
+
+aa_draw_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "ArturAlvesEuroMillionsBundle:Draw:update" }
+    requirements: { _method: post|put }
+
+aa_draw_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "ArturAlvesEuroMillionsBundle:Draw:delete" }
+    requirements: { _method: post|delete }

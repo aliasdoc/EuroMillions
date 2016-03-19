@@ -1,7 +1,0 @@
-aa_EuroMillions_homepage:
-    pattern:  /
-    defaults: { _controller: AAEuroMillionsBundle:Dashboard:index }
-
-# AAEuroMillionsBundle_aa_draw:
-#     resource: "@AAEuroMillionsBundle/Resources/config/routing/draw.yml"
-#     prefix:   /draw
