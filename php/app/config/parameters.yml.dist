@@ -13,16 +13,3 @@ parameters:
 
     locale:            en
     secret:            ThisTokenIsNotSoSecretChangeIt
-
-    aa_EuroMillions:
-        rules:
-            draw:
-                numbers: 
-                    count: 5
-                    range: [1, 50]
-                stars: 
-                    count: 2
-                    range: [1, 11]
-                recurrency:
-                    type: daily
-                    value: "Tue, Fri"

@@ -2,6 +2,7 @@ imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
     - { resource: params.php }
+    - { resource: "@ArturAlvesEuroMillionsBundle/Resources/config/config.yml" }
 
 framework:
     #esi:             ~
@@ -65,8 +66,3 @@ swiftmailer:
     username:  %mailer_user%
     password:  %mailer_password%
     spool:     { type: memory }
-
-# services:
-#     aa_EuroMillions_rulesHelper:
-#         class: AA\EuroMillions\Helper\RulesHelper
-#         arguments: ['@service_container']

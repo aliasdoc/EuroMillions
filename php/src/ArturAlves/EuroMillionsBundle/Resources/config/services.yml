@@ -1,0 +1,10 @@
+services:
+    artur_alves_euro_millions.rules:
+        class: ArturAlves\EuroMillionsBundle\Model\Rules
+        arguments: ['@service_container']
+
+    validator.unique.draw_validator:
+        class: ArturAlves\EuroMillionsBundle\Validator\Constraints\ObeysTheRulesValidator
+        arguments: ['@artur_alves_euro_millions.rules']
+        tags:
+            - { name: validator.constraint_validator, alias: ObeysTheRulesValidator }
