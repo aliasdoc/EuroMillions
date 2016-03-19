@@ -1,0 +1,7 @@
+artur_alves_euro_millions_homepage:
+    pattern:  /
+    defaults: { _controller: ArturAlvesEuroMillionsBundle:Dashboard:index }
+
+# ArturAlvesEuroMillionsBundle_aa_draw:
+#     resource: "@ArturAlvesEuroMillionsBundle/Resources/config/routing/draw.yml"
+#     prefix:   /draw

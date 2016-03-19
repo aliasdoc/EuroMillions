@@ -2,6 +2,7 @@ imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
     - { resource: params.php }
+    - { resource: "@ArturAlvesEuroMillionsBundle/Resources/config/config.yml" }
 
 framework:
     #esi:             ~

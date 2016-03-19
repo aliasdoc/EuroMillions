@@ -1,0 +1,16 @@
+ArturAlves\EuroMillionsBundle\Entity\Draw:
+    type: entity
+    repositoryClass: DrawRepository
+    table: draw
+    fields:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+        result:
+            type: string
+            nullable: false
+        date:
+            type: date
+            nullable: false

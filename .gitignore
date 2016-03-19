@@ -38,3 +38,6 @@
 
 # Composer PHAR
 /php/composer.phar
+
+# Ctags
+.tags
