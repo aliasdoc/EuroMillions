@@ -42,12 +42,14 @@ class DrawRulesRepository extends EntityRepository
     public function getDrawRules(\DateTime $date)
     {
         $qb = $this->createQueryBuilder('dr')
-            ->where('dr.is_active = 0 AND dr.since_date >= :date AND dr.until_date <= :date')
-            ->orWhere('dr.is_active = 1 AND dr.since_date >= :date')
+            ->where('dr.is_active = 0 AND dr.active_since <= :date AND dr.active_until >= :date')
+            ->orWhere('dr.is_active = 1 AND dr.active_since <= :date')
             ->setParameter(':date', $date->format("Y-m-d"))
             ->setMaxResults(1);
 
         $query = $qb->getQuery();
+        $sql=$query->getSQL();
+        $parameters=$query->getParameters();
 
         return $query->getSingleResult();
     }

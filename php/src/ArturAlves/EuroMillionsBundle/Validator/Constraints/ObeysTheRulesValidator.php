@@ -8,6 +8,8 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * Verifies if a Draw obeys the configured rules.
+ *
+ * @author Artur Alves <artur.alves@gatewit.com>
  */
 class ObeysTheRulesValidator extends ConstraintValidator
 {
@@ -21,8 +23,6 @@ class ObeysTheRulesValidator extends ConstraintValidator
     /**
      * Constructor
      *
-     * @author Artur Alves <artur.alves@gatewit.com>
-     *
      * @param  ContainerInterface $container The service container
      */
     public function __construct(ContainerInterface $container)
@@ -33,19 +33,27 @@ class ObeysTheRulesValidator extends ConstraintValidator
     /**
      * Validates a Draw
      *
-     * @author Artur Alves <artur.alves@gatewit.com>
-     *
      * @param  Draw $draw The draw to be validated
      * @param  Constraint $constraint The constraint
      */
     public function validate($draw, Constraint $constraint)
     {
-        $result = json_decode($draw->getResult(), true);
+        // Checks if the date is set
+        if (is_null($draw->getDate())) {
+            $this->context->addViolationAt(
+                'date',
+                'The date is not set'
+            );
+
+            return false;
+        }
 
         // Gets the active rules
         $em = $this->container->get('doctrine')->getManager();
         $drawRulesRepository = $em->getRepository('ArturAlvesEuroMillionsBundle:DrawRules');
-        $rules = $drawRulesRepository->getActiveDrawRules();
+        $rules = $drawRulesRepository->getDrawRules($draw->getDate());
+
+        $result = json_decode($draw->getResult(), true);
 
         // Checks if the result array format is valid
         if (!isset($result['numbers']) || !isset($result['stars'])) {
@@ -97,7 +105,7 @@ class ObeysTheRulesValidator extends ConstraintValidator
 
         // Checks if the date is valid
         $drawDays = explode(",", $rules->getWeekDays());
-        if (is_null($draw->getDate()) || !in_array($draw->getDate()->format('D'), $drawDays)) {
+        if (!in_array($draw->getDate()->format('D'), $drawDays)) {
             $this->context->addViolationAt(
                 'date',
                 'The date is not valid'
