@@ -25,6 +25,6 @@ class ArturAlvesEuroMillionsExtension extends Extension
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.yml');
 
-        $container->setParameter('artur_alves_euro_millions.rules', $config['rules']);
+        // $container->setParameter('artur_alves_euro_millions.rules', $config);
     }
 }

@@ -1,0 +1,41 @@
+ArturAlves\EuroMillionsBundle\Entity\DrawRules:
+    type: entity
+    repositoryClass: DrawRulesRepository
+    table: draw_rules
+    fields:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+        number_count:
+            type: integer
+            nullable: false
+        number_min_value:
+            type: integer
+            nullable: false
+        number_max_value:
+            type: integer
+            nullable: false
+        star_count:
+            type: integer
+            nullable: false
+        star_min_value:
+            type: integer
+            nullable: false
+        star_max_value:
+            type: integer
+            nullable: false
+        week_days:
+            type: string
+            length: 30
+            nullable: false
+        is_active:
+            type: boolean
+            nullable: false
+        active_since:
+            type: date
+            nullable: false
+        active_until:
+            type: date
+            nullable: true

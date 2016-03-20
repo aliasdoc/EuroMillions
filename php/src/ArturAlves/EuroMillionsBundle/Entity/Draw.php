@@ -4,7 +4,6 @@ namespace ArturAlves\EuroMillionsBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
-use Symfony\Component\Validator\ExecutionContextInterface;
 use ArturAlves\EuroMillionsBundle\Validator\Constraints as RulesAssert;
 
 /**
@@ -88,10 +87,5 @@ class Draw
     public function getDate()
     {
         return $this->date;
-    }
-
-    public function isDrawValid(ExecutionContextInterface $context)
-    {
-        
     }
 }
