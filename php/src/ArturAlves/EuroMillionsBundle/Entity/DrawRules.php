@@ -6,61 +6,88 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * DrawRules
+ *
+ * @ORM\Table(name="draw_rules")
+ * @ORM\Entity(repositoryClass="ArturAlves\EuroMillionsBundle\Entity\DrawRulesRepository")
  */
 class DrawRules
 {
     /**
      * @var integer
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $id;
 
     /**
      * @var integer
+     *
+     * @ORM\Column(name="number_count", type="integer", nullable=false)
      */
     private $number_count;
 
     /**
      * @var integer
+     *
+     * @ORM\Column(name="number_min_value", type="integer", nullable=false)
      */
     private $number_min_value;
 
     /**
      * @var integer
+     *
+     * @ORM\Column(name="number_max_value", type="integer", nullable=false)
      */
     private $number_max_value;
 
     /**
      * @var integer
+     *
+     * @ORM\Column(name="star_count", type="integer", nullable=false)
      */
     private $star_count;
 
     /**
      * @var integer
+     *
+     * @ORM\Column(name="star_min_value", type="integer", nullable=false)
      */
     private $star_min_value;
 
     /**
      * @var integer
+     *
+     * @ORM\Column(name="star_max_value", type="integer", nullable=false)
      */
     private $star_max_value;
 
     /**
-     * @var \DateTime
+     * @var string
+     *
+     * @ORM\Column(name="week_days", type="string", length=30, nullable=false)
      */
     private $week_days;
 
     /**
      * @var boolean
+     *
+     * @ORM\Column(name="is_active", type="boolean", nullable=false)
      */
     private $is_active;
 
     /**
      * @var \DateTime
+     *
+     * @ORM\Column(name="active_since", type="date", nullable=false)
      */
     private $active_since;
 
     /**
      * @var \DateTime
+     *
+     * @ORM\Column(name="active_until", type="date", nullable=true)
      */
     private $active_until;
 
