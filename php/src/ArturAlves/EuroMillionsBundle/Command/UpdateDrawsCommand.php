@@ -67,7 +67,7 @@ class UpdateDrawsCommand extends ContainerAwareCommand
 
                 $validator = $this->getContainer()->get('validator');
                 $errors = $validator->validate($draw);
-                if(count($errors) > 0) {
+                if (count($errors) > 0) {
                     $output->writeln("Error: ".json_encode($errors));
                 } else {
                     $em->persist($draw);
