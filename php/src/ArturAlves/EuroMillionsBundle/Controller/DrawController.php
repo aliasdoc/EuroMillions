@@ -22,11 +22,10 @@ class DrawController extends Controller
     public function indexAction()
     {
         $em = $this->getDoctrine()->getManager();
-
-        $entities = $em->getRepository('ArturAlvesEuroMillionsBundle:Draw')->findAll();
+        $draws = $em->getRepository('ArturAlvesEuroMillionsBundle:Draw')->findAll();
 
         return $this->render('ArturAlvesEuroMillionsBundle:Draw:index.html.twig', array(
-            'entities' => $entities,
+            'draws' => $draws,
         ));
     }
 

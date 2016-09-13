@@ -8,10 +8,7 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
-// use ArturAlves\EuroMillionsBundle\Utils\Crawler\EuroMillionsCrawler;
-use ArturAlves\EuroMillionsBundle\Entity\Number;
-use ArturAlves\EuroMillionsBundle\Entity\NumberRepository;
-
+use Doctrine\Common\Collections\ArrayCollection as DoctrineArrayCollection;
 // use ArturAlves\EuroMillionsBundle\Helper\RulesHelper;
 
 /**
@@ -19,9 +16,20 @@ use ArturAlves\EuroMillionsBundle\Entity\NumberRepository;
  */
 class BasicStatisticsCommand extends ContainerAwareCommand
 {
-
+    /**
+     * @var InputInterface
+     */
     private $intput;
+
+    /**
+    * @var OutputInterface
+    */
     private $output;
+
+    /**
+     * @var EntityManager
+     */
+    private $em;
 
     protected function configure()
     {
@@ -34,62 +42,62 @@ class BasicStatisticsCommand extends ContainerAwareCommand
     /**
      * Command's main execution
      *
-     * @param  InputInterface $input [description]
-     * @param  OutputInterface $output [description]
+     * @param  InputInterface $input
+     * @param  OutputInterface $output
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $this->input = $input;
         $this->output = $output;
+
         // $rules = RulesHelper::getInstance($this->getContainer());
         // die("--".$rules->getNumbersCount());
 
-        $em = $this->getContainer()->get('doctrine')->getManager();
-        $drawRepository = $em->getRepository('ArturAlvesEuroMillionsBundle:Draw');
+        $this->em = $this->getContainer()->get('doctrine')->getManager();
+        $drawRepository = $this->em->getRepository('ArturAlvesEuroMillionsBundle:Draw');
         $draws = $drawRepository->findAll();
 
-        $numberTotals = array();
-        $starTotals = array();
+        $numberFrequencies = array();
+        $starFrequencies = array();
         foreach ($draws as $draw) {
-            $numberTotals = $this->calcTotal($draw->getNumbers());
-            $starTotals = $this->calcTotal($draw->getStars());
+            $numberFrequencies = $this->calcFrequency($numberFrequencies, $draw->getNumbers());
+            $starFrequencies = $this->calcFrequency($starFrequencies, $draw->getStars());
         }
         unset($drawRepository, $draws);
 
-        $numberRepo = $em->getRepository('ArturAlvesEuroMillionsBundle:Number');
-        $this->saveStats($numberRepo, $numberTotals);
-        unset($numberRepo, $numberTotals);
+        $numberRepo = $this->em->getRepository('ArturAlvesEuroMillionsBundle:Number');
+        $this->saveStats($numberRepo, $numberFrequencies);
+        unset($numberRepo, $numberFrequencies);
 
-        $starRepo = $em->getRepository('ArturAlvesEuroMillionsBundle:Star');
-        $this->saveStats($starRepo, $starTotals);
-        unset($starRepo, $starTotals);
+        $starRepo = $this->em->getRepository('ArturAlvesEuroMillionsBundle:Star');
+        $this->saveStats($starRepo, $starFrequencies);
+        unset($starRepo, $starFrequencies);
 
         $output->writeln("Execution terminated successfully");
     }
 
     /**
-     * Gets each number and star's total
+     * Gets each number and star's frequency
      *
      * @since  {nextRelease}
      *
-     * @param  ArrayCollection $elements
+     * @param  DoctrineArrayCollection $elements
      *
-     * @return array Totals of each number/star
+     * @return array Frequencies of each number/star
      */
-    private function calcTotal(ArrayCollection $elements)
+    private function calcFrequency(array $frequencies, DoctrineArrayCollection $elements)
     {
-        $totals = array();
         foreach ($elements as $element) {
             $value = $element->getValue();
-            if (!isset($totals[$value])) {
-                $totals[$value] = 0;
+            if (!isset($frequencies[$value])) {
+                $frequencies[$value] = 0;
             }
-            if (!isset($totals[$value])) {
-                $totals[$value] = 0;
+            if (!isset($frequencies[$value])) {
+                $frequencies[$value] = 0;
             }
-            $totals[$value] += 1;
+            $frequencies[$value] += 1;
         }
-        return $totals;
+        return $frequencies;
     }
 
     /**
@@ -98,15 +106,15 @@ class BasicStatisticsCommand extends ContainerAwareCommand
      * @since  {nextRelease}
      *
      * @param  EntityRepository $repository The entity to persist
-     * @param  array $totals The data to persist
+     * @param  array $frequencies The data to persist
      *
      * @return boolean FALSE if there was any error, TRUE otherwise.
      */
-    private function saveStats(EntityRepository $repository, array $totals)
+    private function saveStats($repository, array $frequencies)
     {
-        foreach ($totals as $key => $value) {
+        foreach ($frequencies as $key => $value) {
             $entity = $repository->findOneBy(array('value' => $key));
-            $entity->setTotal($value);
+            $entity->setFrequency($value);
 
             $validator = $this->getContainer()->get('validator');
             $errors = $validator->validate($entity);
@@ -115,9 +123,10 @@ class BasicStatisticsCommand extends ContainerAwareCommand
                 return false;
             }
 
-            $em->persist($entity);
-            $em->flush();
-            return true;
+            $this->em->persist($entity);
+            $this->em->flush();
         }
+
+        return true;
     }
 }

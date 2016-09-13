@@ -32,9 +32,9 @@ class Number implements DrawableInterface
     /**
      * @var integer
      *
-     * @ORM\Column(name="total", type="integer")
+     * @ORM\Column(name="frequency", type="integer")
      */
-    private $total;
+    private $frequency;
 
 
     /**
@@ -71,25 +71,25 @@ class Number implements DrawableInterface
     }
 
     /**
-     * Set total
+     * Set frequency
      *
-     * @param integer $total
+     * @param integer $frequency
      * @return Number
      */
-    public function setTotal($total)
+    public function setFrequency($frequency)
     {
-        $this->total = $total;
+        $this->frequency = $frequency;
 
         return $this;
     }
 
     /**
-     * Get total
+     * Get frequency
      *
      * @return integer
      */
-    public function getTotal()
+    public function getFrequency()
     {
-        return $this->total;
+        return $this->frequency;
     }
 }

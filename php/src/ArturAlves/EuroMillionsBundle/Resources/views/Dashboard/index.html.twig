@@ -3,45 +3,36 @@
 {% block body %}
     <h1 class="page-header">Dashboard</h1>
 
-    <!-- <div class="row placeholders">
-        <div class="col-xs-6 col-sm-3 placeholder">
-            <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
-            <h4>Label</h4>
-            <span class="text-muted">Something else</span>
-        </div>
-        <div class="col-xs-6 col-sm-3 placeholder">
-            <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
-            <h4>Label</h4>
-            <span class="text-muted">Something else</span>
-        </div>
-        <div class="col-xs-6 col-sm-3 placeholder">
-            <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
-            <h4>Label</h4>
-            <span class="text-muted">Something else</span>
-        </div>
-        <div class="col-xs-6 col-sm-3 placeholder">
-            <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
-            <h4>Label</h4>
-            <span class="text-muted">Something else</span>
-        </div>
-    </div> -->
-
-    <h2 class="sub-header">Draw results</h2>
+    <h2 class="sub-header">Frequencies</h2>
     <div class="table-responsive">
         <table class="table table-striped">
             <thead>
                 <tr>
-                    <th>Id</th>
-                    <th>Result</th>
-                    <th>Date</th>
+                    <th>Number</th>
+                    <th>Frequency</th>
                 </tr>
             </thead>
             <tbody>
-                {% for draw in draws %}
+                {% for number in numbers %}
                     <tr>
-                        <td>{{ draw.id }}</td>
-                        <td>{{ draw.result }}</td>
-                        <td>{{ draw.date|date('Y-m-d') }}</td>
+                        <td>{{ number.value }}</td>
+                        <td>{{ number.frequency }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Star</th>
+                    <th>Frequency</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for star in stars %}
+                    <tr>
+                        <td>{{ star.value }}</td>
+                        <td>{{ star.frequency }}</td>
                     </tr>
                 {% endfor %}
             </tbody>

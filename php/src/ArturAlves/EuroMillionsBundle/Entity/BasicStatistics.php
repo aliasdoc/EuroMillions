@@ -32,7 +32,7 @@ class BasicStatistics
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -55,7 +55,7 @@ class BasicStatistics
     /**
      * Get total
      *
-     * @return integer 
+     * @return integer
      */
     public function getTotal()
     {
