@@ -9,7 +9,6 @@ use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
 use Doctrine\Common\Collections\ArrayCollection as DoctrineArrayCollection;
-// use ArturAlves\EuroMillionsBundle\Helper\RulesHelper;
 
 /**
  * Imports the latest draws
@@ -34,7 +33,7 @@ class BasicStatisticsCommand extends ContainerAwareCommand
     protected function configure()
     {
         $this
-            ->setName('aa:basic-statistics')
+            ->setName('aa:basic-stats')
             ->setDescription('Calculate all basic statistics')
         ;
     }
@@ -50,9 +49,6 @@ class BasicStatisticsCommand extends ContainerAwareCommand
         $this->input = $input;
         $this->output = $output;
 
-        // $rules = RulesHelper::getInstance($this->getContainer());
-        // die("--".$rules->getNumbersCount());
-
         $this->em = $this->getContainer()->get('doctrine')->getManager();
         $drawRepository = $this->em->getRepository('ArturAlvesEuroMillionsBundle:Draw');
         $draws = $drawRepository->findAll();
@@ -63,14 +59,24 @@ class BasicStatisticsCommand extends ContainerAwareCommand
             $numberFrequencies = $this->calcFrequency($numberFrequencies, $draw->getNumbers());
             $starFrequencies = $this->calcFrequency($starFrequencies, $draw->getStars());
         }
+        // @todo: remover estes valores daqui
+        $totalNumbers = count($draws) * 5;
+        $totalStars = count($draws) * 2;
+
         unset($drawRepository, $draws);
 
         $numberRepo = $this->em->getRepository('ArturAlvesEuroMillionsBundle:Number');
-        $this->saveStats($numberRepo, $numberFrequencies);
+        $this->saveStats($numberRepo, array(
+            'frequency' => $numberFrequencies,
+            'total' => $totalNumbers
+        ));
         unset($numberRepo, $numberFrequencies);
 
         $starRepo = $this->em->getRepository('ArturAlvesEuroMillionsBundle:Star');
-        $this->saveStats($starRepo, $starFrequencies);
+        $this->saveStats($starRepo, array(
+            'frequency' => $starFrequencies,
+            'total' => $totalStars
+        ));
         unset($starRepo, $starFrequencies);
 
         $output->writeln("Execution terminated successfully");
@@ -106,15 +112,18 @@ class BasicStatisticsCommand extends ContainerAwareCommand
      * @since  {nextRelease}
      *
      * @param  EntityRepository $repository The entity to persist
-     * @param  array $frequencies The data to persist
+     * @param  array $data The data to persist
      *
      * @return boolean FALSE if there was any error, TRUE otherwise.
      */
-    private function saveStats($repository, array $frequencies)
+    private function saveStats($repository, array $data)
     {
+        $frequencies = $data['frequency'];
+
         foreach ($frequencies as $key => $value) {
             $entity = $repository->findOneBy(array('value' => $key));
             $entity->setFrequency($value);
+            $entity->setPercentage($value / $data['total']);
 
             $validator = $this->getContainer()->get('validator');
             $errors = $validator->validate($entity);

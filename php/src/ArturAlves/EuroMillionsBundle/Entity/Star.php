@@ -37,6 +37,13 @@ class Star implements DrawableInterface
     private $frequency;
 
     /**
+     * @var integer
+     *
+     * @ORM\Column(name="percentage", type="float")
+     */
+    private $percentage;
+
+    /**
      * Get id
      *
      * @return integer
@@ -90,5 +97,28 @@ class Star implements DrawableInterface
     public function getFrequency()
     {
         return $this->frequency;
+    }
+
+    /**
+     * Set percentage
+     *
+     * @param integer $percentage
+     * @return Star
+     */
+    public function setPercentage($percentage)
+    {
+        $this->percentage = $percentage;
+
+        return $this;
+    }
+
+    /**
+     * Get percentage
+     *
+     * @return integer
+     */
+    public function getPercentage()
+    {
+        return $this->percentage;
     }
 }

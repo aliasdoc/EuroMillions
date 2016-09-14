@@ -36,6 +36,13 @@ class Number implements DrawableInterface
      */
     private $frequency;
 
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="percentage", type="float")
+     */
+    private $percentage;
+
 
     /**
      * Get id
@@ -91,5 +98,28 @@ class Number implements DrawableInterface
     public function getFrequency()
     {
         return $this->frequency;
+    }
+
+    /**
+     * Set percentage
+     *
+     * @param integer $percentage
+     * @return Number
+     */
+    public function setPercentage($percentage)
+    {
+        $this->percentage = $percentage;
+
+        return $this;
+    }
+
+    /**
+     * Get percentage
+     *
+     * @return integer
+     */
+    public function getPercentage()
+    {
+        return $this->percentage;
     }
 }
