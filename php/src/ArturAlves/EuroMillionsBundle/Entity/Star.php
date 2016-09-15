@@ -39,6 +39,13 @@ class Star implements DrawableInterface
     /**
      * @var integer
      *
+     * @ORM\Column(name="relative_frequency", type="float")
+     */
+    private $relative_frequency;
+
+    /**
+     * @var integer
+     *
      * @ORM\Column(name="percentage", type="float")
      */
     private $percentage;
@@ -100,9 +107,32 @@ class Star implements DrawableInterface
     }
 
     /**
+     * Set relative_frequency
+     *
+     * @param float $relativeFrequency
+     * @return Star
+     */
+    public function setRelativeFrequency($relativeFrequency)
+    {
+        $this->relative_frequency = $relativeFrequency;
+
+        return $this;
+    }
+
+    /**
+     * Get relative_frequency
+     *
+     * @return float
+     */
+    public function getRelativeFrequency()
+    {
+        return $this->relative_frequency;
+    }
+
+    /**
      * Set percentage
      *
-     * @param integer $percentage
+     * @param float $percentage
      * @return Star
      */
     public function setPercentage($percentage)
@@ -115,7 +145,7 @@ class Star implements DrawableInterface
     /**
      * Get percentage
      *
-     * @return integer
+     * @return float 
      */
     public function getPercentage()
     {

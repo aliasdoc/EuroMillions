@@ -39,6 +39,13 @@ class Number implements DrawableInterface
     /**
      * @var integer
      *
+     * @ORM\Column(name="relative_frequency", type="float")
+     */
+    private $relative_frequency;
+
+    /**
+     * @var integer
+     *
      * @ORM\Column(name="percentage", type="float")
      */
     private $percentage;
@@ -101,9 +108,32 @@ class Number implements DrawableInterface
     }
 
     /**
+     * Set relative_frequency
+     *
+     * @param float $relativeFrequency
+     * @return Number
+     */
+    public function setRelativeFrequency($relativeFrequency)
+    {
+        $this->relative_frequency = $relativeFrequency;
+
+        return $this;
+    }
+
+    /**
+     * Get relative_frequency
+     *
+     * @return float
+     */
+    public function getRelativeFrequency()
+    {
+        return $this->relative_frequency;
+    }
+
+    /**
      * Set percentage
      *
-     * @param integer $percentage
+     * @param float $percentage
      * @return Number
      */
     public function setPercentage($percentage)
@@ -116,7 +146,7 @@ class Number implements DrawableInterface
     /**
      * Get percentage
      *
-     * @return integer
+     * @return float 
      */
     public function getPercentage()
     {

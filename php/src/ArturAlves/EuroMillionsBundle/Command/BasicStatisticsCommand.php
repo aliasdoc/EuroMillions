@@ -55,14 +55,15 @@ class BasicStatisticsCommand extends ContainerAwareCommand
 
         $numberFrequencies = array();
         $starFrequencies = array();
+        $totalNumbers = 0;
+        $totalStars = 0;
         foreach ($draws as $draw) {
             $numberFrequencies = $this->calcFrequency($numberFrequencies, $draw->getNumbers());
+            $totalNumbers += count($draw->getNumbers());
+            
             $starFrequencies = $this->calcFrequency($starFrequencies, $draw->getStars());
+            $totalStars += count($draw->getStars());
         }
-        // @todo: remover estes valores daqui
-        $totalNumbers = count($draws) * 5;
-        $totalStars = count($draws) * 2;
-
         unset($drawRepository, $draws);
 
         $numberRepo = $this->em->getRepository('ArturAlvesEuroMillionsBundle:Number');
@@ -123,7 +124,9 @@ class BasicStatisticsCommand extends ContainerAwareCommand
         foreach ($frequencies as $key => $value) {
             $entity = $repository->findOneBy(array('value' => $key));
             $entity->setFrequency($value);
-            $entity->setPercentage($value / $data['total']);
+            $relativeFrequency = $value / $data['total'];
+            $entity->setRelativeFrequency($relativeFrequency);
+            $entity->setPercentage($relativeFrequency * 100);
 
             $validator = $this->getContainer()->get('validator');
             $errors = $validator->validate($entity);

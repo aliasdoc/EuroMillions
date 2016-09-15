@@ -10,6 +10,8 @@
                 <tr>
                     <th>Number</th>
                     <th>Frequency</th>
+                    <th>Relative Frequency</th>
+                    <th>Percentage</th>
                 </tr>
             </thead>
             <tbody>
@@ -17,6 +19,8 @@
                     <tr>
                         <td>{{ number.value }}</td>
                         <td>{{ number.frequency }}</td>
+                        <td>{{ number.relativeFrequency }}</td>
+                        <td>{{ number.percentage }}</td>
                     </tr>
                 {% endfor %}
             </tbody>
@@ -26,6 +30,8 @@
                 <tr>
                     <th>Star</th>
                     <th>Frequency</th>
+                    <th>Relative Frequency</th>
+                    <th>Percentage</th>
                 </tr>
             </thead>
             <tbody>
@@ -33,6 +39,8 @@
                     <tr>
                         <td>{{ star.value }}</td>
                         <td>{{ star.frequency }}</td>
+                        <td>{{ star.relativeFrequency }}</td>
+                        <td>{{ star.percentage }}</td>
                     </tr>
                 {% endfor %}
             </tbody>

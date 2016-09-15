@@ -9,7 +9,6 @@ class LoadNumberData implements FixtureInterface
 {
     public function load(ObjectManager $manager)
     {
-        // @todo: get min and max values from DB
         $min = 1;
         $max = 50;
         for ($i = $min; $i <= $max; $i++) {

@@ -48,8 +48,8 @@ class DrawRulesRepository extends EntityRepository
             ->setMaxResults(1);
 
         $query = $qb->getQuery();
-        $sql=$query->getSQL();
-        $parameters=$query->getParameters();
+        // $sql=$query->getSQL();
+        // $parameters=$query->getParameters();
 
         return $query->getSingleResult();
     }
