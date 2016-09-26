@@ -13,8 +13,10 @@ class LoadNumberData implements FixtureInterface
         $max = 50;
         for ($i = $min; $i <= $max; $i++) {
             $number = new Number();
-            $number->setValue($i);
-            $number->setFrequency(0);
+            $number->setValue($i)
+                ->setFrequency(0)
+                ->setRelativeFrequency(0)
+                ->setPercentage(0);
 
             $manager->persist($number);
             $manager->flush();

@@ -55,6 +55,19 @@ class Draw
     }
 
     /**
+     * Set id
+     *
+     * @param string $id
+     * @return Draw
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+
+        return $this;
+    }
+
+    /**
      * Set result
      *
      * @param string $result

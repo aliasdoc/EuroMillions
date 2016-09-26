@@ -13,8 +13,10 @@ class LoadStarData implements FixtureInterface
         $max = 11;
         for ($i = $min; $i <= $max; $i++) {
             $star = new Star();
-            $star->setValue($i);
-            $star->setFrequency(0);
+            $star->setValue($i)
+                ->setFrequency(0)
+                ->setRelativeFrequency(0)
+                ->setPercentage(0);
 
             $manager->persist($star);
             $manager->flush();
