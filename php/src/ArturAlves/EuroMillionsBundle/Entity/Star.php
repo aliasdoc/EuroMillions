@@ -51,6 +51,13 @@ class Star implements DrawableInterface
     private $percentage;
 
     /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="last_occurrence", type="date")
+     */
+    private $lastOccurrence;
+
+    /**
      * Get id
      *
      * @return integer
@@ -145,10 +152,37 @@ class Star implements DrawableInterface
     /**
      * Get percentage
      *
-     * @return float 
+     * @return float
      */
     public function getPercentage()
     {
         return $this->percentage;
+    }
+
+    /**
+     * Set lastOccurrence
+     *
+     * @param \DateTime $lastOccurrence
+     * @return Star
+     */
+    public function setLastOccurrence($lastOccurrence)
+    {
+        if (!$lastOccurrence instanceof \DateTime) {
+            $this->lastOccurrence = new \DateTime($lastOccurrence);
+        } else {
+            $this->lastOccurrence = $lastOccurrence;
+        }
+
+        return $this;
+    }
+
+    /**
+     * Get lastOccurrence
+     *
+     * @return \DateTime
+     */
+    public function getLastOccurrence()
+    {
+        return $this->lastOccurrence;
     }
 }

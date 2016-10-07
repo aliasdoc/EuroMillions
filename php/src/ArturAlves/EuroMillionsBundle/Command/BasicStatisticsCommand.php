@@ -55,28 +55,42 @@ class BasicStatisticsCommand extends ContainerAwareCommand
 
         $numberFrequencies = array();
         $starFrequencies = array();
+        $numbersLastOccurrence = array();
+        $starsLastOccurrence = array();
         $totalNumbers = 0;
         $totalStars = 0;
         foreach ($draws as $draw) {
             $numberFrequencies = $this->calcFrequency($numberFrequencies, $draw->getNumbers());
             $totalNumbers += count($draw->getNumbers());
-            
+            $numbersLastOccurrence = $this->calcLastOccurrence(
+                $numbersLastOccurrence,
+                $draw->getNumbers(),
+                $draw->getDate()
+            );
+
             $starFrequencies = $this->calcFrequency($starFrequencies, $draw->getStars());
             $totalStars += count($draw->getStars());
+            $starsLastOccurrence = $this->calcLastOccurrence(
+                $starsLastOccurrence,
+                $draw->getStars(),
+                $draw->getDate()
+            );
         }
         unset($drawRepository, $draws);
 
         $numberRepo = $this->em->getRepository('ArturAlvesEuroMillionsBundle:Number');
         $this->saveStats($numberRepo, array(
             'frequency' => $numberFrequencies,
-            'total' => $totalNumbers
+            'total' => $totalNumbers,
+            'occurrences' => $numbersLastOccurrence
         ));
         unset($numberRepo, $numberFrequencies);
 
         $starRepo = $this->em->getRepository('ArturAlvesEuroMillionsBundle:Star');
         $this->saveStats($starRepo, array(
             'frequency' => $starFrequencies,
-            'total' => $totalStars
+            'total' => $totalStars,
+            'occurrences' => $starsLastOccurrence
         ));
         unset($starRepo, $starFrequencies);
 
@@ -99,12 +113,28 @@ class BasicStatisticsCommand extends ContainerAwareCommand
             if (!isset($frequencies[$value])) {
                 $frequencies[$value] = 0;
             }
-            if (!isset($frequencies[$value])) {
-                $frequencies[$value] = 0;
-            }
             $frequencies[$value] += 1;
         }
         return $frequencies;
+    }
+
+    /**
+     * Gets each number and star's last occurrence
+     *
+     * @since  {nextRelease}
+     *
+     * @param  DoctrineArrayCollection $elements
+     * @param  \DateTime $elements
+     *
+     * @return array Last occurrence of each number/star
+     */
+    private function calcLastOccurrence(array $occurrences, DoctrineArrayCollection $elements, \Datetime $date)
+    {
+        foreach ($elements as $element) {
+            $value = $element->getValue();
+            $occurrences[$value] = $date;
+        }
+        return $occurrences;
     }
 
     /**
@@ -127,6 +157,7 @@ class BasicStatisticsCommand extends ContainerAwareCommand
             $relativeFrequency = $value / $data['total'];
             $entity->setRelativeFrequency($relativeFrequency);
             $entity->setPercentage($relativeFrequency * 100);
+            $entity->setLastOccurrence($data['occurrences'][$key]);
 
             $validator = $this->getContainer()->get('validator');
             $errors = $validator->validate($entity);

@@ -12,6 +12,7 @@
                     <th>Frequency</th>
                     <th>Relative Frequency</th>
                     <th>Percentage</th>
+                    <th>Last Occurrence</th>
                 </tr>
             </thead>
             <tbody>
@@ -21,6 +22,7 @@
                         <td>{{ number.frequency }}</td>
                         <td>{{ number.relativeFrequency }}</td>
                         <td>{{ number.percentage }}</td>
+                        <td>{{ number.lastOccurrence|date('Y-m-d') }}</td>
                     </tr>
                 {% endfor %}
             </tbody>
@@ -32,6 +34,7 @@
                     <th>Frequency</th>
                     <th>Relative Frequency</th>
                     <th>Percentage</th>
+                    <th>Last Occurrence</th>
                 </tr>
             </thead>
             <tbody>
@@ -41,6 +44,7 @@
                         <td>{{ star.frequency }}</td>
                         <td>{{ star.relativeFrequency }}</td>
                         <td>{{ star.percentage }}</td>
+                        <td>{{ star.lastOccurrence|date('Y-m-d') }}</td>
                     </tr>
                 {% endfor %}
             </tbody>
