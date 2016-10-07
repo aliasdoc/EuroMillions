@@ -53,7 +53,7 @@ class Star implements DrawableInterface
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="last_occurrence", type="date")
+     * @ORM\Column(name="last_occurrence", type="date", nullable=true)
      */
     private $lastOccurrence;
 
