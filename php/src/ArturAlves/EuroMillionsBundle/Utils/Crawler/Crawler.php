@@ -1,4 +1,5 @@
 <?php
+
 namespace ArturAlves\EuroMillionsBundle\Utils\Crawler;
 
 class Crawler
@@ -6,7 +7,7 @@ class Crawler
     protected $hasCrawled;
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @author Artur Alves <artur.alves@gatewit.com>
      */
@@ -16,7 +17,7 @@ class Crawler
     }
 
     /**
-     * Executes the crawler
+     * Executes the crawler.
      *
      * @author Artur Alves <artur.alves@gatewit.com>
      */
@@ -26,12 +27,12 @@ class Crawler
     }
 
     /**
-     * Gets the content of a URL
+     * Gets the content of a URL.
      *
      * @author Artur Alves <artur.alves@gatewit.com>
      *
-     * @param  string $url The URL from where the output will come
-     * @param  boolean $returnDomDocument Defines if the return will be a string or a DOMDocument object
+     * @param string $url               The URL from where the output will come
+     * @param bool   $returnDomDocument Defines if the return will be a string or a DOMDocument object
      *
      * @return string|DOMDocument The $url output string or a DOMDocument
      */
@@ -43,22 +44,23 @@ class Crawler
 
         $content = file_get_contents($url);
         if (empty($content)) {
-            return "";
+            return '';
         }
 
         $doc = new \DOMDocument();
         libxml_use_internal_errors(true);
         $doc->loadHTML($content);
         libxml_use_internal_errors(false);
+
         return $doc;
     }
 
     /**
-     * Checks if the crawler has crawled
+     * Checks if the crawler has crawled.
      *
      * @author Artur Alves <artur.alves@gatewit.com>
      *
-     * @return boolean True if the crawler has executed, false otherwise
+     * @return bool True if the crawler has executed, false otherwise
      */
     public function hasCrawled()
     {

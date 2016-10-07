@@ -4,35 +4,29 @@ namespace ArturAlves\EuroMillionsBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-
 use ArturAlves\EuroMillionsBundle\Entity\Draw;
 use ArturAlves\EuroMillionsBundle\Form\DrawType;
 
 /**
  * Draw controller.
- *
  */
 class DrawController extends Controller
 {
-
     /**
      * Lists all Draw entities.
-     *
      */
     public function indexAction()
     {
         $em = $this->getDoctrine()->getManager();
-
-        $entities = $em->getRepository('ArturAlvesEuroMillionsBundle:Draw')->findAll();
+        $draws = $em->getRepository('ArturAlvesEuroMillionsBundle:Draw')->findAll();
 
         return $this->render('ArturAlvesEuroMillionsBundle:Draw:index.html.twig', array(
-            'entities' => $entities,
+            'draws' => $draws,
         ));
     }
 
     /**
      * Creates a new Draw entity.
-     *
      */
     public function createAction(Request $request)
     {
@@ -50,17 +44,17 @@ class DrawController extends Controller
 
         return $this->render('ArturAlvesEuroMillionsBundle:Draw:new.html.twig', array(
             'entity' => $entity,
-            'form'   => $form->createView(),
+            'form' => $form->createView(),
         ));
     }
 
     /**
-    * Creates a form to create a Draw entity.
-    *
-    * @param Draw $entity The entity
-    *
-    * @return \Symfony\Component\Form\Form The form
-    */
+     * Creates a form to create a Draw entity.
+     *
+     * @param Draw $entity The entity
+     *
+     * @return \Symfony\Component\Form\Form The form
+     */
     private function createCreateForm(Draw $entity)
     {
         $form = $this->createForm(new DrawType(), $entity, array(
@@ -75,22 +69,20 @@ class DrawController extends Controller
 
     /**
      * Displays a form to create a new Draw entity.
-     *
      */
     public function newAction()
     {
         $entity = new Draw();
-        $form   = $this->createCreateForm($entity);
+        $form = $this->createCreateForm($entity);
 
         return $this->render('ArturAlvesEuroMillionsBundle:Draw:new.html.twig', array(
             'entity' => $entity,
-            'form'   => $form->createView(),
+            'form' => $form->createView(),
         ));
     }
 
     /**
      * Finds and displays a Draw entity.
-     *
      */
     public function showAction($id)
     {
@@ -105,13 +97,12 @@ class DrawController extends Controller
         $deleteForm = $this->createDeleteForm($id);
 
         return $this->render('ArturAlvesEuroMillionsBundle:Draw:show.html.twig', array(
-            'entity'      => $entity,
+            'entity' => $entity,
             'delete_form' => $deleteForm->createView(),        ));
     }
 
     /**
      * Displays a form to edit an existing Draw entity.
-     *
      */
     public function editAction($id)
     {
@@ -127,19 +118,19 @@ class DrawController extends Controller
         $deleteForm = $this->createDeleteForm($id);
 
         return $this->render('ArturAlvesEuroMillionsBundle:Draw:edit.html.twig', array(
-            'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
+            'entity' => $entity,
+            'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         ));
     }
 
     /**
-    * Creates a form to edit a Draw entity.
-    *
-    * @param Draw $entity The entity
-    *
-    * @return \Symfony\Component\Form\Form The form
-    */
+     * Creates a form to edit a Draw entity.
+     *
+     * @param Draw $entity The entity
+     *
+     * @return \Symfony\Component\Form\Form The form
+     */
     private function createEditForm(Draw $entity)
     {
         $form = $this->createForm(new DrawType(), $entity, array(
@@ -153,7 +144,6 @@ class DrawController extends Controller
     }
     /**
      * Edits an existing Draw entity.
-     *
      */
     public function updateAction(Request $request, $id)
     {
@@ -176,14 +166,13 @@ class DrawController extends Controller
         }
 
         return $this->render('ArturAlvesEuroMillionsBundle:Draw:edit.html.twig', array(
-            'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
+            'entity' => $entity,
+            'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         ));
     }
     /**
      * Deletes a Draw entity.
-     *
      */
     public function deleteAction(Request $request, $id)
     {

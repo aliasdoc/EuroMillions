@@ -1,4 +1,5 @@
 <?php
+
 namespace ArturAlves\EuroMillionsBundle\Tests\Command;
 
 use ArturAlves\EuroMillionsBundle\Command\UpdateDrawsCommand;

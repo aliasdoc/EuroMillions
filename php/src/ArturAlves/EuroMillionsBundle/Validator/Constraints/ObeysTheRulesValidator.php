@@ -4,110 +4,111 @@ namespace ArturAlves\EuroMillionsBundle\Validator\Constraints;
 
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
-use ArturAlves\EuroMillionsBundle\Model\Rules;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * Verifies if a Draw obeys the configured rules.
+ *
+ * @author Artur Alves <artur.alves@gatewit.com>
  */
 class ObeysTheRulesValidator extends ConstraintValidator
 {
     /**
-     * The rules to validate the draw
+     * The service container.
      *
-     * @var Rules
+     * @var ContainerInterface
      */
-    protected $rules;
+    protected $container;
 
     /**
-     * Constructor
+     * Constructor.
      *
-     * @author Artur Alves <artur.alves@gatewit.com>
-     *
-     * @param  Rules $rules Necessary rules to validate the draw
+     * @param ContainerInterface $container The service container
      */
-    public function __construct(Rules $rules)
+    public function __construct(ContainerInterface $container)
     {
-        $this->rules = $rules;
+        $this->container = $container;
     }
 
     /**
-     * Validates a Draw
+     * Validates a Draw.
      *
-     * @author Artur Alves <artur.alves@gatewit.com>
-     *
-     * @param  Draw $draw The draw to be validated
-     * @param  Constraint $constraint The constraint
+     * @param Draw       $draw       The draw to be validated
+     * @param Constraint $constraint The constraint
      */
     public function validate($draw, Constraint $constraint)
     {
+        // Checks if the date is set
+        if (is_null($draw->getDate())) {
+            $this->context->addViolationAt(
+                'date',
+                'The date is not set'
+            );
+
+            return false;
+        }
+
+        // Gets the active rules
+        $em = $this->container->get('doctrine')->getManager();
+        $drawRulesRepository = $em->getRepository('ArturAlvesEuroMillionsBundle:DrawRules');
+        $rules = $drawRulesRepository->getDrawRules($draw->getDate());
+
         $result = json_decode($draw->getResult(), true);
 
         // Checks if the result array format is valid
         if (!isset($result['numbers']) || !isset($result['stars'])) {
             $this->context->addViolationAt(
                 'result',
-                'The result format is not valid',
-                array(),
-                null
+                'The result format is not valid'
             );
         }
 
         // Checks if the numbers count is valid
-        if (count($result['numbers']) !== $this->rules->getNumbersCount()) {
+        if (count($result['numbers']) !== $rules->getNumberCount()) {
             $this->context->addViolationAt(
                 'result',
-                'The numbers count is not valid',
-                array(),
-                null
+                'The numbers count is not valid'
             );
         }
 
         // Checks if the numbers are in the range
-        for ($i = 0; $i < count($result['numbers']); $i++) {
-            if ($result['numbers'][$i] > $this->rules->getNumbersMaxLimit()
-                || $result['numbers'][$i] < $this->rules->getNumbersMinLimit()
+        for ($i = 0; $i < count($result['numbers']); ++$i) {
+            if ($result['numbers'][$i] > $rules->getNumberMaxValue()
+                || $result['numbers'][$i] < $rules->getNumberMinValue()
             ) {
                 $this->context->addViolationAt(
                     'result',
-                    'The numbers are not in the valid range',
-                    array(),
-                    null
+                    'The numbers are not in the valid range'
                 );
             }
         }
 
         // Checks if the stars count is valid
-        if (count($result['stars']) !== $this->rules->getStarsCount()) {
+        if (count($result['stars']) !== $rules->getStarCount()) {
             $this->context->addViolationAt(
                 'result',
-                'The stars count is not valid',
-                array(),
-                null
+                'The stars count is not valid'
             );
         }
 
         // Checks if the stars are in the range
-        for ($i = 0; $i < count($result['stars']); $i++) {
-            if ($result['stars'][$i] > $this->rules->getStarsMaxLimit()
-                || $result['stars'][$i] < $this->rules->getStarsMinLimit()
+        for ($i = 0; $i < count($result['stars']); ++$i) {
+            if ($result['stars'][$i] > $rules->getStarMaxValue()
+                || $result['stars'][$i] < $rules->getStarMinValue()
             ) {
                 $this->context->addViolationAt(
                     'result',
-                    'The stars are not in the valid range',
-                    array(),
-                    null
+                    'The stars are not in the valid range'
                 );
             }
         }
 
         // Checks if the date is valid
-        $drawDays = explode(",", $this->rules->getRecurrency());
-        if (is_null($draw->getDate()) || !in_array($draw->getDate()->format('D'), $drawDays)) {
+        $drawDays = explode(',', $rules->getWeekDays());
+        if (!in_array($draw->getDate()->format('D'), $drawDays)) {
             $this->context->addViolationAt(
                 'date',
-                'The date is not valid',
-                array(),
-                null
+                'The date is not valid'
             );
         }
     }

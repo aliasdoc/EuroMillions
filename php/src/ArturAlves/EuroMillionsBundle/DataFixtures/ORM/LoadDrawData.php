@@ -1,19 +1,26 @@
 <?php
+
 namespace ArturAlves\EuroMillionsBundle\DataFixtures\ORM;
 
 use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
+use Symfony\Component\Yaml\Yaml;
 use ArturAlves\EuroMillionsBundle\Entity\Draw;
 
 class LoadDrawData implements FixtureInterface
 {
     public function load(ObjectManager $manager)
     {
-        $draw = new Draw();
-        $draw->setResult('{"numbers":[4,37,38,39,44],"stars":[4,7]}');
-        $draw->setDate("2016-01-01");
+        $fixtures = Yaml::parse(file_get_contents(dirname(__FILE__).'/draw.yml'));
+        foreach ($fixtures as $key => $fixture) {
+            $draw = new Draw();
+            $draw
+                ->setId($fixture['id'])
+                ->setResult($fixture['result'])
+                ->setDate($fixture['date']);
 
-        $manager->persist($draw);
-        $manager->flush();
+            $manager->persist($draw);
+            $manager->flush();
+        }
     }
 }
