@@ -5,7 +5,7 @@ namespace ArturAlves\EuroMillionsBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * DrawRules
+ * DrawRules.
  *
  * @ORM\Table(name="draw_rules")
  * @ORM\Entity(repositoryClass="ArturAlves\EuroMillionsBundle\Entity\DrawRulesRepository")
@@ -13,7 +13,7 @@ use Doctrine\ORM\Mapping as ORM;
 class DrawRules
 {
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
@@ -22,42 +22,42 @@ class DrawRules
     private $id;
 
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="number_count", type="integer", nullable=false)
      */
     private $number_count;
 
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="number_min_value", type="integer", nullable=false)
      */
     private $number_min_value;
 
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="number_max_value", type="integer", nullable=false)
      */
     private $number_max_value;
 
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="star_count", type="integer", nullable=false)
      */
     private $star_count;
 
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="star_min_value", type="integer", nullable=false)
      */
     private $star_min_value;
 
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="star_max_value", type="integer", nullable=false)
      */
@@ -71,7 +71,7 @@ class DrawRules
     private $week_days;
 
     /**
-     * @var boolean
+     * @var bool
      *
      * @ORM\Column(name="is_active", type="boolean", nullable=false)
      */
@@ -91,11 +91,10 @@ class DrawRules
      */
     private $active_until;
 
-
     /**
-     * Get id
+     * Get id.
      *
-     * @return integer
+     * @return int
      */
     public function getId()
     {
@@ -103,9 +102,10 @@ class DrawRules
     }
 
     /**
-     * Set number_count
+     * Set number_count.
      *
-     * @param integer $numberCount
+     * @param int $numberCount
+     *
      * @return DrawRules
      */
     public function setNumberCount($numberCount)
@@ -116,9 +116,9 @@ class DrawRules
     }
 
     /**
-     * Get number_count
+     * Get number_count.
      *
-     * @return integer
+     * @return int
      */
     public function getNumberCount()
     {
@@ -126,9 +126,10 @@ class DrawRules
     }
 
     /**
-     * Set number_min_value
+     * Set number_min_value.
      *
-     * @param integer $numberMinValue
+     * @param int $numberMinValue
+     *
      * @return DrawRules
      */
     public function setNumberMinValue($numberMinValue)
@@ -139,9 +140,9 @@ class DrawRules
     }
 
     /**
-     * Get number_min_value
+     * Get number_min_value.
      *
-     * @return integer
+     * @return int
      */
     public function getNumberMinValue()
     {
@@ -149,9 +150,10 @@ class DrawRules
     }
 
     /**
-     * Set number_max_value
+     * Set number_max_value.
      *
-     * @param integer $numberMaxValue
+     * @param int $numberMaxValue
+     *
      * @return DrawRules
      */
     public function setNumberMaxValue($numberMaxValue)
@@ -162,9 +164,9 @@ class DrawRules
     }
 
     /**
-     * Get number_max_value
+     * Get number_max_value.
      *
-     * @return integer
+     * @return int
      */
     public function getNumberMaxValue()
     {
@@ -172,9 +174,10 @@ class DrawRules
     }
 
     /**
-     * Set star_count
+     * Set star_count.
      *
-     * @param integer $starCount
+     * @param int $starCount
+     *
      * @return DrawRules
      */
     public function setStarCount($starCount)
@@ -185,9 +188,9 @@ class DrawRules
     }
 
     /**
-     * Get star_count
+     * Get star_count.
      *
-     * @return integer
+     * @return int
      */
     public function getStarCount()
     {
@@ -195,9 +198,10 @@ class DrawRules
     }
 
     /**
-     * Set star_min_value
+     * Set star_min_value.
      *
-     * @param integer $starMinValue
+     * @param int $starMinValue
+     *
      * @return DrawRules
      */
     public function setStarMinValue($starMinValue)
@@ -208,9 +212,9 @@ class DrawRules
     }
 
     /**
-     * Get star_min_value
+     * Get star_min_value.
      *
-     * @return integer
+     * @return int
      */
     public function getStarMinValue()
     {
@@ -218,9 +222,10 @@ class DrawRules
     }
 
     /**
-     * Set star_max_value
+     * Set star_max_value.
      *
-     * @param integer $starMaxValue
+     * @param int $starMaxValue
+     *
      * @return DrawRules
      */
     public function setStarMaxValue($starMaxValue)
@@ -231,9 +236,9 @@ class DrawRules
     }
 
     /**
-     * Get star_max_value
+     * Get star_max_value.
      *
-     * @return integer
+     * @return int
      */
     public function getStarMaxValue()
     {
@@ -241,9 +246,10 @@ class DrawRules
     }
 
     /**
-     * Set week_days
+     * Set week_days.
      *
      * @param \DateTime $weekDays
+     *
      * @return DrawRules
      */
     public function setWeekDays($weekDays)
@@ -254,7 +260,7 @@ class DrawRules
     }
 
     /**
-     * Get week_days
+     * Get week_days.
      *
      * @return \DateTime
      */
@@ -264,9 +270,10 @@ class DrawRules
     }
 
     /**
-     * Set is_active
+     * Set is_active.
      *
-     * @param boolean $isActive
+     * @param bool $isActive
+     *
      * @return DrawRules
      */
     public function setIsActive($isActive)
@@ -277,9 +284,9 @@ class DrawRules
     }
 
     /**
-     * Get is_active
+     * Get is_active.
      *
-     * @return boolean
+     * @return bool
      */
     public function getIsActive()
     {
@@ -287,9 +294,10 @@ class DrawRules
     }
 
     /**
-     * Set active_since
+     * Set active_since.
      *
      * @param \DateTime $activeSince
+     *
      * @return DrawRules
      */
     public function setActiveSince($activeSince)
@@ -300,7 +308,7 @@ class DrawRules
     }
 
     /**
-     * Get active_since
+     * Get active_since.
      *
      * @return \DateTime
      */
@@ -310,9 +318,10 @@ class DrawRules
     }
 
     /**
-     * Set active_until
+     * Set active_until.
      *
      * @param \DateTime $activeUntil
+     *
      * @return DrawRules
      */
     public function setActiveUntil($activeUntil)
@@ -323,7 +332,7 @@ class DrawRules
     }
 
     /**
-     * Get active_until
+     * Get active_until.
      *
      * @return \DateTime
      */

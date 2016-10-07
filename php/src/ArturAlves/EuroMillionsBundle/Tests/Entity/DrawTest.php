@@ -10,7 +10,7 @@ class DrawTest extends WebTestCase
     private $validator;
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function setUp()
     {
@@ -31,57 +31,57 @@ class DrawTest extends WebTestCase
 
         // Is invalid with 4 numbers
         $invalidResult = array(
-            "numbers" => array(1, 2, 3, 4),
-            "stars" => array(1, 2)
+            'numbers' => array(1, 2, 3, 4),
+            'stars' => array(1, 2),
         );
         $this->isInvalid($draw, $invalidResult);
 
         // Is invalid with number 0
         $invalidResult = array(
-            "numbers" => array(0, 1, 2, 3, 4),
-            "stars" => array(1, 2)
+            'numbers' => array(0, 1, 2, 3, 4),
+            'stars' => array(1, 2),
         );
         $this->isInvalid($draw, $invalidResult);
 
         // Is invalid with 6 numbers
         $invalidResult = array(
-            "numbers" => array(45, 46, 47, 48, 49, 50),
-            "stars" => array(1, 2)
+            'numbers' => array(45, 46, 47, 48, 49, 50),
+            'stars' => array(1, 2),
         );
         $this->isInvalid($draw, $invalidResult);
 
         // Is invalid with number 51
         $invalidResult = array(
-            "numbers" => array(47, 48, 49, 50, 51),
-            "stars" => array(1, 2)
+            'numbers' => array(47, 48, 49, 50, 51),
+            'stars' => array(1, 2),
         );
         $this->isInvalid($draw, $invalidResult);
 
         // Is invalid with 1 star
         $invalidResult = array(
-            "numbers" => array(46, 47, 48, 49, 50),
-            "stars" => array(1)
+            'numbers' => array(46, 47, 48, 49, 50),
+            'stars' => array(1),
         );
         $this->isInvalid($draw, $invalidResult);
 
         // Is invalid with star 0
         $invalidResult = array(
-            "numbers" => array(46, 47, 48, 49, 50),
-            "stars" => array(0, 1)
+            'numbers' => array(46, 47, 48, 49, 50),
+            'stars' => array(0, 1),
         );
         $this->isInvalid($draw, $invalidResult);
 
         // Is invalid with star 12
         $invalidResult = array(
-            "numbers" => array(46, 47, 48, 49, 50),
-            "stars" => array(11, 12)
+            'numbers' => array(46, 47, 48, 49, 50),
+            'stars' => array(11, 12),
         );
         $this->isInvalid($draw, $invalidResult);
 
         // Is valid
         $validResult = array(
-            "numbers" => array(46, 47, 48, 49, 50),
-            "stars" => array(10, 11)
+            'numbers' => array(46, 47, 48, 49, 50),
+            'stars' => array(10, 11),
         );
         $draw->setResult(json_encode($validResult));
         $errors = $this->validator->validate($draw);
@@ -89,11 +89,11 @@ class DrawTest extends WebTestCase
     }
 
     /**
-     * Checks if a draw is invalid
+     * Checks if a draw is invalid.
      *
      * @author Artur Alves <artur.alves@gatewit.com>
      *
-     * @param  Draw $draw A Draw to validate
+     * @param Draw $draw A Draw to validate
      */
     private function isInvalid($draw, $invalidResult = null)
     {

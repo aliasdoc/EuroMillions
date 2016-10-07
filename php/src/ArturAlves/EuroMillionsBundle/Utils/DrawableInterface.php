@@ -5,24 +5,25 @@ namespace ArturAlves\EuroMillionsBundle\Utils;
 interface DrawableInterface
 {
     /**
-     * Get id
+     * Get id.
      *
-     * @return integer
+     * @return int
      */
     public function getId();
 
     /**
-     * Set value
+     * Set value.
      *
-     * @param integer $value
+     * @param int $value
+     *
      * @return Number
      */
     public function setValue($value);
 
     /**
-     * Get value
+     * Get value.
      *
-     * @return integer
+     * @return int
      */
     public function getValue();
 }

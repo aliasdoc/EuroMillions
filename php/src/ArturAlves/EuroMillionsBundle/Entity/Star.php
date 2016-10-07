@@ -6,7 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use ArturAlves\EuroMillionsBundle\Utils\DrawableInterface;
 
 /**
- * Star
+ * Star.
  *
  * @ORM\Table(name="star")
  * @ORM\Entity(repositoryClass="ArturAlves\EuroMillionsBundle\Entity\StarRepository")
@@ -14,7 +14,7 @@ use ArturAlves\EuroMillionsBundle\Utils\DrawableInterface;
 class Star implements DrawableInterface
 {
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
@@ -23,28 +23,28 @@ class Star implements DrawableInterface
     private $id;
 
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="value", type="integer")
      */
     private $value;
 
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="frequency", type="integer")
      */
     private $frequency;
 
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="relative_frequency", type="float")
      */
     private $relative_frequency;
 
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="percentage", type="float")
      */
@@ -58,9 +58,9 @@ class Star implements DrawableInterface
     private $lastOccurrence;
 
     /**
-     * Get id
+     * Get id.
      *
-     * @return integer
+     * @return int
      */
     public function getId()
     {
@@ -68,9 +68,10 @@ class Star implements DrawableInterface
     }
 
     /**
-     * Set value
+     * Set value.
      *
-     * @param integer $value
+     * @param int $value
+     *
      * @return Star
      */
     public function setValue($value)
@@ -81,9 +82,9 @@ class Star implements DrawableInterface
     }
 
     /**
-     * Get value
+     * Get value.
      *
-     * @return integer
+     * @return int
      */
     public function getValue()
     {
@@ -91,9 +92,10 @@ class Star implements DrawableInterface
     }
 
     /**
-     * Set frequency
+     * Set frequency.
      *
-     * @param integer $frequency
+     * @param int $frequency
+     *
      * @return Star
      */
     public function setFrequency($frequency)
@@ -104,9 +106,9 @@ class Star implements DrawableInterface
     }
 
     /**
-     * Get frequency
+     * Get frequency.
      *
-     * @return integer
+     * @return int
      */
     public function getFrequency()
     {
@@ -114,9 +116,10 @@ class Star implements DrawableInterface
     }
 
     /**
-     * Set relative_frequency
+     * Set relative_frequency.
      *
      * @param float $relativeFrequency
+     *
      * @return Star
      */
     public function setRelativeFrequency($relativeFrequency)
@@ -127,7 +130,7 @@ class Star implements DrawableInterface
     }
 
     /**
-     * Get relative_frequency
+     * Get relative_frequency.
      *
      * @return float
      */
@@ -137,9 +140,10 @@ class Star implements DrawableInterface
     }
 
     /**
-     * Set percentage
+     * Set percentage.
      *
      * @param float $percentage
+     *
      * @return Star
      */
     public function setPercentage($percentage)
@@ -150,7 +154,7 @@ class Star implements DrawableInterface
     }
 
     /**
-     * Get percentage
+     * Get percentage.
      *
      * @return float
      */
@@ -160,9 +164,10 @@ class Star implements DrawableInterface
     }
 
     /**
-     * Set lastOccurrence
+     * Set lastOccurrence.
      *
      * @param \DateTime $lastOccurrence
+     *
      * @return Star
      */
     public function setLastOccurrence($lastOccurrence)
@@ -177,7 +182,7 @@ class Star implements DrawableInterface
     }
 
     /**
-     * Get lastOccurrence
+     * Get lastOccurrence.
      *
      * @return \DateTime
      */

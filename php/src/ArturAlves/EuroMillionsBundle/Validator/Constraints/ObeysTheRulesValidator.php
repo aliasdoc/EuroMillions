@@ -14,16 +14,16 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 class ObeysTheRulesValidator extends ConstraintValidator
 {
     /**
-     * The service container
+     * The service container.
      *
      * @var ContainerInterface
      */
     protected $container;
 
     /**
-     * Constructor
+     * Constructor.
      *
-     * @param  ContainerInterface $container The service container
+     * @param ContainerInterface $container The service container
      */
     public function __construct(ContainerInterface $container)
     {
@@ -31,10 +31,10 @@ class ObeysTheRulesValidator extends ConstraintValidator
     }
 
     /**
-     * Validates a Draw
+     * Validates a Draw.
      *
-     * @param  Draw $draw The draw to be validated
-     * @param  Constraint $constraint The constraint
+     * @param Draw       $draw       The draw to be validated
+     * @param Constraint $constraint The constraint
      */
     public function validate($draw, Constraint $constraint)
     {
@@ -72,7 +72,7 @@ class ObeysTheRulesValidator extends ConstraintValidator
         }
 
         // Checks if the numbers are in the range
-        for ($i = 0; $i < count($result['numbers']); $i++) {
+        for ($i = 0; $i < count($result['numbers']); ++$i) {
             if ($result['numbers'][$i] > $rules->getNumberMaxValue()
                 || $result['numbers'][$i] < $rules->getNumberMinValue()
             ) {
@@ -92,7 +92,7 @@ class ObeysTheRulesValidator extends ConstraintValidator
         }
 
         // Checks if the stars are in the range
-        for ($i = 0; $i < count($result['stars']); $i++) {
+        for ($i = 0; $i < count($result['stars']); ++$i) {
             if ($result['stars'][$i] > $rules->getStarMaxValue()
                 || $result['stars'][$i] < $rules->getStarMinValue()
             ) {
@@ -104,7 +104,7 @@ class ObeysTheRulesValidator extends ConstraintValidator
         }
 
         // Checks if the date is valid
-        $drawDays = explode(",", $rules->getWeekDays());
+        $drawDays = explode(',', $rules->getWeekDays());
         if (!in_array($draw->getDate()->format('D'), $drawDays)) {
             $this->context->addViolationAt(
                 'date',

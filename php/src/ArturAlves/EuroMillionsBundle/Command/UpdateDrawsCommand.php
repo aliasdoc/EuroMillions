@@ -3,18 +3,14 @@
 namespace ArturAlves\EuroMillionsBundle\Command;
 
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
-use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
-
 use ArturAlves\EuroMillionsBundle\Utils\Crawler\EuroMillionsCrawler;
 use ArturAlves\EuroMillionsBundle\Entity\Draw;
-
 use ArturAlves\EuroMillionsBundle\Helper\RulesHelper;
 
 /**
- * Imports the latest draws
+ * Imports the latest draws.
  */
 class UpdateDrawsCommand extends ContainerAwareCommand
 {
@@ -27,12 +23,12 @@ class UpdateDrawsCommand extends ContainerAwareCommand
     }
 
     /**
-     * Command's main execution
+     * Command's main execution.
      *
      * @author Artur Alves <artur.ze.alves@gmail.com>
      *
-     * @param  InputInterface $input [description]
-     * @param  OutputInterface $output [description]
+     * @param InputInterface  $input  [description]
+     * @param OutputInterface $output [description]
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
@@ -49,9 +45,9 @@ class UpdateDrawsCommand extends ContainerAwareCommand
         $latestDrawDate = $latestDraw->getDate()->format('Y-m-d');
         $latestDrawDates = $drawRepository->getDrawDatesSince($latestDrawDate);
         if (count($latestDrawDates) == 0) {
-            $output->writeln("[".date("Y-m-d", strtotime("today")) . "] - Nothing to update");
+            $output->writeln('['.date('Y-m-d', strtotime('today')).'] - Nothing to update');
         } else {
-            $output->writeln("Latest draw dates: ".json_encode($latestDrawDates));
+            $output->writeln('Latest draw dates: '.json_encode($latestDrawDates));
 
             $crawler = new EuroMillionsCrawler();
             foreach ($latestDrawDates as $key => $date) {
@@ -68,7 +64,7 @@ class UpdateDrawsCommand extends ContainerAwareCommand
                 $validator = $this->getContainer()->get('validator');
                 $errors = $validator->validate($draw);
                 if (count($errors) > 0) {
-                    $output->writeln("Error: ".json_encode($errors));
+                    $output->writeln('Error: '.json_encode($errors));
                 } else {
                     $em->persist($draw);
                     $em->flush();
@@ -76,6 +72,6 @@ class UpdateDrawsCommand extends ContainerAwareCommand
             }
         }
 
-        $output->writeln("Execution terminated successfully");
+        $output->writeln('Execution terminated successfully');
     }
 }

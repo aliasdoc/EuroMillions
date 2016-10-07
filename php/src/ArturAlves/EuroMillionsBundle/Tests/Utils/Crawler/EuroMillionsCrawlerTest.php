@@ -1,4 +1,5 @@
 <?php
+
 namespace ArturAlves\EuroMillionsBundle\Tests\Utils\Crawler;
 
 use ArturAlves\EuroMillionsBundle\Utils\Crawler\EuroMillionsCrawler;
@@ -14,9 +15,9 @@ class EuroMillionsCrawlerTest extends \PHPUnit_Framework_TestCase
         $this->assertNull($result);
         $this->assertFalse($crawler->hasCrawled());
 
-        $crawler->setDate(strtotime("2016-01-01"));
+        $crawler->setDate(strtotime('2016-01-01'));
         $result = $crawler->crawl();
-        $this->assertArrayHasKey("numbers", $result);
-        $this->assertArrayHasKey("stars", $result);
+        $this->assertArrayHasKey('numbers', $result);
+        $this->assertArrayHasKey('stars', $result);
     }
 }

@@ -1,4 +1,5 @@
 <?php
+
 namespace ArturAlves\EuroMillionsBundle\DataFixtures\ORM;
 
 use Doctrine\Common\DataFixtures\FixtureInterface;
@@ -17,10 +18,10 @@ class LoadDrawRulesData implements FixtureInterface
             ->setStarCount(2)
             ->setStarMinValue(1)
             ->setStarMaxValue(9)
-            ->setWeekDays("Tue")
+            ->setWeekDays('Tue')
             ->setIsActive(false)
-            ->setActiveSince(new \DateTime("2004-02-13"))
-            ->setActiveUntil(new \DateTime("2011-05-06"));
+            ->setActiveSince(new \DateTime('2004-02-13'))
+            ->setActiveUntil(new \DateTime('2011-05-06'));
 
         $manager->persist($initialRules);
         $manager->flush();
@@ -28,9 +29,9 @@ class LoadDrawRulesData implements FixtureInterface
         $activeRules = clone $initialRules;
         $activeRules
             ->setStarMaxValue(11)
-            ->setWeekDays("Tue,Fri")
+            ->setWeekDays('Tue,Fri')
             ->setIsActive(true)
-            ->setActiveSince(new \DateTime("2011-05-10"))
+            ->setActiveSince(new \DateTime('2011-05-10'))
             ->setActiveUntil(null);
 
         $manager->persist($activeRules);

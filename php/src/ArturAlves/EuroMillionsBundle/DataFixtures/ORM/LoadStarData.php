@@ -1,4 +1,5 @@
 <?php
+
 namespace ArturAlves\EuroMillionsBundle\DataFixtures\ORM;
 
 use Doctrine\Common\DataFixtures\FixtureInterface;
@@ -11,7 +12,7 @@ class LoadStarData implements FixtureInterface
     {
         $min = 1;
         $max = 11;
-        for ($i = $min; $i <= $max; $i++) {
+        for ($i = $min; $i <= $max; ++$i) {
             $star = new Star();
             $star->setValue($i)
                 ->setFrequency(0)

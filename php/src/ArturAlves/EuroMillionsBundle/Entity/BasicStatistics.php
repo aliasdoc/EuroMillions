@@ -5,7 +5,7 @@ namespace ArturAlves\EuroMillionsBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * BasicStatistics
+ * BasicStatistics.
  *
  * @ORM\Table()
  * @ORM\Entity(repositoryClass="ArturAlves\EuroMillionsBundle\Entity\BasicStatisticsRepository")
@@ -13,7 +13,7 @@ use Doctrine\ORM\Mapping as ORM;
 class BasicStatistics
 {
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
@@ -22,17 +22,16 @@ class BasicStatistics
     private $id;
 
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="total", type="integer")
      */
     private $total;
 
-
     /**
-     * Get id
+     * Get id.
      *
-     * @return integer
+     * @return int
      */
     public function getId()
     {
@@ -40,9 +39,10 @@ class BasicStatistics
     }
 
     /**
-     * Set total
+     * Set total.
      *
-     * @param integer $total
+     * @param int $total
+     *
      * @return BasicStatistics
      */
     public function setTotal($total)
@@ -53,9 +53,9 @@ class BasicStatistics
     }
 
     /**
-     * Get total
+     * Get total.
      *
-     * @return integer
+     * @return int
      */
     public function getTotal()
     {
