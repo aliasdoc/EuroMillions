@@ -8,7 +8,7 @@ use ArturAlves\EuroMillionsBundle\Validator\Constraints as RulesAssert;
 use Doctrine\Common\Collections\ArrayCollection;
 
 /**
- * Draw
+ * Draw.
  *
  * @ORM\Table(name="draw")
  * @ORM\Entity(repositoryClass="ArturAlves\EuroMillionsBundle\Entity\DrawRepository")
@@ -18,7 +18,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 class Draw
 {
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
@@ -45,9 +45,9 @@ class Draw
     private $date;
 
     /**
-     * Get id
+     * Get id.
      *
-     * @return integer
+     * @return int
      */
     public function getId()
     {
@@ -55,9 +55,10 @@ class Draw
     }
 
     /**
-     * Set id
+     * Set id.
      *
      * @param string $id
+     *
      * @return Draw
      */
     public function setId($id)
@@ -68,9 +69,10 @@ class Draw
     }
 
     /**
-     * Set result
+     * Set result.
      *
      * @param string $result
+     *
      * @return Draw
      */
     public function setResult($result)
@@ -81,7 +83,7 @@ class Draw
     }
 
     /**
-     * Get result
+     * Get result.
      *
      * @return string
      */
@@ -91,9 +93,10 @@ class Draw
     }
 
     /**
-     * Set date
+     * Set date.
      *
      * @param \DateTime $date
+     *
      * @return Draw
      */
     public function setDate($date)
@@ -108,7 +111,7 @@ class Draw
     }
 
     /**
-     * Get date
+     * Get date.
      *
      * @return \DateTime
      */
@@ -118,7 +121,7 @@ class Draw
     }
 
     /**
-     * Get draw's numbers
+     * Get draw's numbers.
      *
      * @return ArrayCollection|null
      */
@@ -141,7 +144,7 @@ class Draw
     }
 
     /**
-     * Get draw's stars
+     * Get draw's stars.
      *
      * @return ArrayCollection|null
      */

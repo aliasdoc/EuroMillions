@@ -1,4 +1,5 @@
 <?php
+
 namespace ArturAlves\EuroMillionsBundle\Tests\Utils\Crawler;
 
 use ArturAlves\EuroMillionsBundle\Utils\Crawler\Crawler;
@@ -7,7 +8,7 @@ class CrawlerTest extends \PHPUnit_Framework_TestCase
 {
     public function testGetContentFrom()
     {
-        $testUrl = "https://phpunit.de/";
+        $testUrl = 'https://phpunit.de/';
         $crawler = new Crawler();
 
         // Testing the getContentFrom function

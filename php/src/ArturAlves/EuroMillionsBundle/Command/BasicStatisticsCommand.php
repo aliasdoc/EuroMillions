@@ -3,15 +3,12 @@
 namespace ArturAlves\EuroMillionsBundle\Command;
 
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
-use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
-
 use Doctrine\Common\Collections\ArrayCollection as DoctrineArrayCollection;
 
 /**
- * Imports the latest draws
+ * Imports the latest draws.
  */
 class BasicStatisticsCommand extends ContainerAwareCommand
 {
@@ -21,8 +18,8 @@ class BasicStatisticsCommand extends ContainerAwareCommand
     private $intput;
 
     /**
-    * @var OutputInterface
-    */
+     * @var OutputInterface
+     */
     private $output;
 
     /**
@@ -39,10 +36,10 @@ class BasicStatisticsCommand extends ContainerAwareCommand
     }
 
     /**
-     * Command's main execution
+     * Command's main execution.
      *
-     * @param  InputInterface $input
-     * @param  OutputInterface $output
+     * @param InputInterface  $input
+     * @param OutputInterface $output
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
@@ -82,7 +79,7 @@ class BasicStatisticsCommand extends ContainerAwareCommand
         $this->saveStats($numberRepo, array(
             'frequency' => $numberFrequencies,
             'total' => $totalNumbers,
-            'occurrences' => $numbersLastOccurrence
+            'occurrences' => $numbersLastOccurrence,
         ));
         unset($numberRepo, $numberFrequencies);
 
@@ -90,19 +87,19 @@ class BasicStatisticsCommand extends ContainerAwareCommand
         $this->saveStats($starRepo, array(
             'frequency' => $starFrequencies,
             'total' => $totalStars,
-            'occurrences' => $starsLastOccurrence
+            'occurrences' => $starsLastOccurrence,
         ));
         unset($starRepo, $starFrequencies);
 
-        $output->writeln("Execution terminated successfully");
+        $output->writeln('Execution terminated successfully');
     }
 
     /**
-     * Gets each number and star's frequency
+     * Gets each number and star's frequency.
      *
-     * @since  {nextRelease}
+     * @since  0.1.0
      *
-     * @param  DoctrineArrayCollection $elements
+     * @param DoctrineArrayCollection $elements
      *
      * @return array Frequencies of each number/star
      */
@@ -115,16 +112,17 @@ class BasicStatisticsCommand extends ContainerAwareCommand
             }
             $frequencies[$value] += 1;
         }
+
         return $frequencies;
     }
 
     /**
-     * Gets each number and star's last occurrence
+     * Gets each number and star's last occurrence.
      *
-     * @since  {nextRelease}
+     * @since  0.1.0
      *
-     * @param  DoctrineArrayCollection $elements
-     * @param  \DateTime $elements
+     * @param DoctrineArrayCollection $elements
+     * @param \DateTime               $elements
      *
      * @return array Last occurrence of each number/star
      */
@@ -134,18 +132,19 @@ class BasicStatisticsCommand extends ContainerAwareCommand
             $value = $element->getValue();
             $occurrences[$value] = $date;
         }
+
         return $occurrences;
     }
 
     /**
      * Persists all calculated statistics.
      *
-     * @since  {nextRelease}
+     * @since  0.1.0
      *
-     * @param  EntityRepository $repository The entity to persist
-     * @param  array $data The data to persist
+     * @param EntityRepository $repository The entity to persist
+     * @param array            $data       The data to persist
      *
-     * @return boolean FALSE if there was any error, TRUE otherwise.
+     * @return bool FALSE if there was any error, TRUE otherwise
      */
     private function saveStats($repository, array $data)
     {
@@ -162,7 +161,8 @@ class BasicStatisticsCommand extends ContainerAwareCommand
             $validator = $this->getContainer()->get('validator');
             $errors = $validator->validate($entity);
             if (count($errors) > 0) {
-                $this->output->writeln("Error: ".json_encode($errors));
+                $this->output->writeln('Error: '.json_encode($errors));
+
                 return false;
             }
 

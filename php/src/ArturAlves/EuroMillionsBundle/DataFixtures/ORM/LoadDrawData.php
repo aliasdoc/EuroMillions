@@ -1,4 +1,5 @@
 <?php
+
 namespace ArturAlves\EuroMillionsBundle\DataFixtures\ORM;
 
 use Doctrine\Common\DataFixtures\FixtureInterface;
@@ -10,7 +11,7 @@ class LoadDrawData implements FixtureInterface
 {
     public function load(ObjectManager $manager)
     {
-        $fixtures = Yaml::parse(file_get_contents(dirname(__FILE__) . '/draw.yml'));
+        $fixtures = Yaml::parse(file_get_contents(dirname(__FILE__).'/draw.yml'));
         foreach ($fixtures as $key => $fixture) {
             $draw = new Draw();
             $draw
