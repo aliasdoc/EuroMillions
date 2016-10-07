@@ -9,10 +9,12 @@ class DashboardController extends Controller
     public function indexAction()
     {
         $em = $this->getDoctrine()->getManager();
-        $draws = $em->getRepository('ArturAlvesEuroMillionsBundle:Draw')->findAll();
+        $numbers = $em->getRepository('ArturAlvesEuroMillionsBundle:Number')->findAll();
+        $stars = $em->getRepository('ArturAlvesEuroMillionsBundle:Star')->findAll();
 
         return $this->render('ArturAlvesEuroMillionsBundle:Dashboard:index.html.twig', array(
-            'draws' => $draws,
+            'numbers' => $numbers,
+            'stars' => $stars,
         ));
     }
 }
