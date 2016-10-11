@@ -167,8 +167,8 @@ class BasicStatisticsCommand extends ContainerAwareCommand
             }
 
             $this->em->persist($entity);
-            $this->em->flush();
         }
+        $this->em->flush();
 
         return true;
     }

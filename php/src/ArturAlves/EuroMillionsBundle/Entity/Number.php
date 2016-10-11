@@ -3,7 +3,6 @@
 namespace ArturAlves\EuroMillionsBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use ArturAlves\EuroMillionsBundle\Utils\DrawableInterface;
 
 /**
  * Number.
@@ -11,7 +10,7 @@ use ArturAlves\EuroMillionsBundle\Utils\DrawableInterface;
  * @ORM\Table(name="number")
  * @ORM\Entity(repositoryClass="ArturAlves\EuroMillionsBundle\Entity\NumberRepository")
  */
-class Number implements DrawableInterface
+class Number
 {
     /**
      * @var int
@@ -20,7 +19,7 @@ class Number implements DrawableInterface
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private $id;
+    private $identifier;
 
     /**
      * @var int
@@ -41,7 +40,7 @@ class Number implements DrawableInterface
      *
      * @ORM\Column(name="relative_frequency", type="float")
      */
-    private $relative_frequency;
+    private $relativeFrequency;
 
     /**
      * @var int
@@ -58,13 +57,13 @@ class Number implements DrawableInterface
     private $lastOccurrence;
 
     /**
-     * Get id.
+     * Get $identifier.
      *
      * @return int
      */
     public function getId()
     {
-        return $this->id;
+        return $this->identifier;
     }
 
     /**
@@ -116,7 +115,7 @@ class Number implements DrawableInterface
     }
 
     /**
-     * Set relative_frequency.
+     * Set relativeFrequency.
      *
      * @param float $relativeFrequency
      *
@@ -124,19 +123,19 @@ class Number implements DrawableInterface
      */
     public function setRelativeFrequency($relativeFrequency)
     {
-        $this->relative_frequency = $relativeFrequency;
+        $this->relativeFrequency = $relativeFrequency;
 
         return $this;
     }
 
     /**
-     * Get relative_frequency.
+     * Get relativeFrequency.
      *
      * @return float
      */
     public function getRelativeFrequency()
     {
-        return $this->relative_frequency;
+        return $this->relativeFrequency;
     }
 
     /**
@@ -172,10 +171,9 @@ class Number implements DrawableInterface
      */
     public function setLastOccurrence($lastOccurrence)
     {
+        $this->lastOccurrence = $lastOccurrence;
         if (!$lastOccurrence instanceof \DateTime) {
             $this->lastOccurrence = new \DateTime($lastOccurrence);
-        } else {
-            $this->lastOccurrence = $lastOccurrence;
         }
 
         return $this;
