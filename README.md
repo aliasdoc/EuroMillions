@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/kingarthurpt/EuroMillions.svg?branch=master)](https://travis-ci.org/kingarthurpt/EuroMillions)
+[![Build Status](https://travis-ci.org/kingarthurpt/EuroMillions.svg?branch=master)](https://travis-ci.org/kingarthurpt/EuroMillions) [![Code Climate](https://codeclimate.com/github/kingarthurpt/EuroMillions/badges/gpa.svg)](https://codeclimate.com/github/kingarthurpt/EuroMillions) [![Issue Count](https://codeclimate.com/github/kingarthurpt/EuroMillions/badges/issue_count.svg)](https://codeclimate.com/github/kingarthurpt/EuroMillions)
 
 ## Introduction
 This is a personal project where I try to predict the next Euro Millions winning numbers.
