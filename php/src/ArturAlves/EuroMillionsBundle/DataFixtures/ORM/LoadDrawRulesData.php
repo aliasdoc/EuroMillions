@@ -19,7 +19,7 @@ class LoadDrawRulesData implements FixtureInterface
             ->setStarMinValue(1)
             ->setStarMaxValue(9)
             ->setWeekDays('Tue')
-            ->setIsActive(false)
+            ->setActive(false)
             ->setActiveSince(new \DateTime('2004-02-13'))
             ->setActiveUntil(new \DateTime('2011-05-06'));
 
@@ -30,7 +30,7 @@ class LoadDrawRulesData implements FixtureInterface
         $activeRules
             ->setStarMaxValue(11)
             ->setWeekDays('Tue,Fri')
-            ->setIsActive(true)
+            ->setActive(true)
             ->setActiveSince(new \DateTime('2011-05-10'))
             ->setActiveUntil(null);
 
