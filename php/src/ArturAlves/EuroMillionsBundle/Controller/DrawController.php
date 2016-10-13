@@ -5,7 +5,7 @@ namespace ArturAlves\EuroMillionsBundle\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use ArturAlves\EuroMillionsBundle\Entity\Draw;
-use ArturAlves\EuroMillionsBundle\Form\DrawType;
+use ArturAlves\EuroMillionsBundle\Form\Type\DrawType;
 
 /**
  * Draw controller.

@@ -72,7 +72,8 @@ class ObeysTheRulesValidator extends ConstraintValidator
         }
 
         // Checks if the numbers are in the range
-        for ($i = 0; $i < count($result['numbers']); ++$i) {
+        $count = count($result['numbers']);
+        for ($i = 0; $i < $count; ++$i) {
             if ($result['numbers'][$i] > $rules->getNumberMaxValue()
                 || $result['numbers'][$i] < $rules->getNumberMinValue()
             ) {
@@ -92,7 +93,8 @@ class ObeysTheRulesValidator extends ConstraintValidator
         }
 
         // Checks if the stars are in the range
-        for ($i = 0; $i < count($result['stars']); ++$i) {
+        $count = count($result['stars']);
+        for ($i = 0; $i < $count; ++$i) {
             if ($result['stars'][$i] > $rules->getStarMaxValue()
                 || $result['stars'][$i] < $rules->getStarMinValue()
             ) {

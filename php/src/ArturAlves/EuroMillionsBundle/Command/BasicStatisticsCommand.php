@@ -13,16 +13,6 @@ use Doctrine\Common\Collections\ArrayCollection as DoctrineArrayCollection;
 class BasicStatisticsCommand extends ContainerAwareCommand
 {
     /**
-     * @var InputInterface
-     */
-    private $intput;
-
-    /**
-     * @var OutputInterface
-     */
-    private $output;
-
-    /**
      * @var EntityManager
      */
     private $em;
@@ -43,8 +33,7 @@ class BasicStatisticsCommand extends ContainerAwareCommand
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $this->input = $input;
-        $this->output = $output;
+        unset($input);
 
         $this->em = $this->getContainer()->get('doctrine')->getManager();
         $drawRepository = $this->em->getRepository('ArturAlvesEuroMillionsBundle:Draw');
