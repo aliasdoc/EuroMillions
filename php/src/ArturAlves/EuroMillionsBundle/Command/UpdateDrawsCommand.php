@@ -7,7 +7,6 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use ArturAlves\EuroMillionsBundle\Utils\Crawler\EuroMillionsCrawler;
 use ArturAlves\EuroMillionsBundle\Entity\Draw;
-use ArturAlves\EuroMillionsBundle\Helper\RulesHelper;
 
 /**
  * Imports the latest draws.
@@ -29,12 +28,11 @@ class UpdateDrawsCommand extends ContainerAwareCommand
      *
      * @param InputInterface  $input  [description]
      * @param OutputInterface $output [description]
+     *
+     * @return bool FALSE if there was any error, TRUE otherwise
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        // $rules = RulesHelper::getInstance($this->getContainer());
-        // die("--".$rules->getNumbersCount());
-
         $em = $this->getContainer()->get('doctrine')->getManager();
         $drawRepository = $em->getRepository('ArturAlvesEuroMillionsBundle:Draw');
 
@@ -46,31 +44,31 @@ class UpdateDrawsCommand extends ContainerAwareCommand
         $latestDrawDates = $drawRepository->getDrawDatesSince($latestDrawDate);
         if (count($latestDrawDates) == 0) {
             $output->writeln('['.date('Y-m-d', strtotime('today')).'] - Nothing to update');
-        } else {
-            $output->writeln('Latest draw dates: '.json_encode($latestDrawDates));
-
-            $crawler = new EuroMillionsCrawler();
-            foreach ($latestDrawDates as $key => $date) {
-                // Obtains the results of each draw
-                $crawler->setDate(strtotime($date));
-                $result = $crawler->crawl();
-                // $result = json_decode('{"numbers":[13,14,30,32,39],"stars":[3,9]}');
-
-                // Creates a new Draw and stores it in the database
-                $draw = new Draw();
-                $draw->setResult(json_encode($result));
-                $draw->setDate($date);
-
-                $validator = $this->getContainer()->get('validator');
-                $errors = $validator->validate($draw);
-                if (count($errors) > 0) {
-                    $output->writeln('Error: '.json_encode($errors));
-                } else {
-                    $em->persist($draw);
-                    $em->flush();
-                }
-            }
+            return false;
         }
+
+        $output->writeln('Latest draw dates: '.json_encode($latestDrawDates));
+
+        $crawler = new EuroMillionsCrawler();
+        foreach ($latestDrawDates as $date) {
+            // Obtains the results of each draw
+            $crawler->setDate(strtotime($date));
+            $result = $crawler->crawl();
+
+            // Creates a new Draw and stores it in the database
+            $draw = new Draw();
+            $draw->setResult(json_encode($result));
+            $draw->setDate($date);
+
+            $validator = $this->getContainer()->get('validator');
+            $errors = $validator->validate($draw);
+            if (count($errors) > 0) {
+                $output->writeln('Error: '.json_encode($errors));
+                continue;
+            }
+            $em->persist($draw);
+        }
+        $em->flush();
 
         $output->writeln('Execution terminated successfully');
     }

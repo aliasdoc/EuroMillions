@@ -1,6 +1,6 @@
 <?php
 
-namespace ArturAlves\EuroMillionsBundle\Form;
+namespace ArturAlves\EuroMillionsBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;

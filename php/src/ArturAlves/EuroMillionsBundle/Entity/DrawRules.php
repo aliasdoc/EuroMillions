@@ -73,9 +73,9 @@ class DrawRules
     /**
      * @var bool
      *
-     * @ORM\Column(name="is_active", type="boolean", nullable=false)
+     * @ORM\Column(name="active", type="boolean", nullable=false)
      */
-    private $is_active;
+    private $active;
 
     /**
      * @var \DateTime
@@ -270,30 +270,6 @@ class DrawRules
     }
 
     /**
-     * Set is_active.
-     *
-     * @param bool $isActive
-     *
-     * @return DrawRules
-     */
-    public function setIsActive($isActive)
-    {
-        $this->is_active = $isActive;
-
-        return $this;
-    }
-
-    /**
-     * Get is_active.
-     *
-     * @return bool
-     */
-    public function getIsActive()
-    {
-        return $this->is_active;
-    }
-
-    /**
      * Set active_since.
      *
      * @param \DateTime $activeSince
@@ -339,5 +315,28 @@ class DrawRules
     public function getActiveUntil()
     {
         return $this->active_until;
+    }
+
+    /**
+     * Set active
+     *
+     * @param boolean $active
+     * @return DrawRules
+     */
+    public function setActive($active)
+    {
+        $this->active = $active;
+
+        return $this;
+    }
+
+    /**
+     * Get active
+     *
+     * @return boolean
+     */
+    public function isActive()
+    {
+        return $this->active;
     }
 }
